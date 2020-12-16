@@ -1,0 +1,51 @@
+<template>
+  <v-footer
+    class="mt-3"
+    dark
+    padless
+  >
+    <v-card
+      flat
+      tile
+      class="blue-grey darken-4 text-center"
+    >
+      <v-card-text>
+        <v-btn
+          v-for="icon in icons"
+          :key="icon"
+          class="mx-4"
+          icon
+        >
+          <v-icon size="24px">
+            {{ icon }}
+          </v-icon>
+        </v-btn>
+      </v-card-text>
+
+      <v-card-text class=" pt-0">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate asperiores id eum pariatur aliquid aperiam nam delectus esse? Quidem doloremque odio nam ipsam tempore laboriosam iusto ullam commodi nihil suscipit?
+        </p>
+      </v-card-text>
+
+      <v-divider></v-divider>
+
+      <v-card-text>
+        {{ new Date().getFullYear() }} — <strong>FORUM ensak entreprise</strong>
+      </v-card-text>
+    </v-card>
+  </v-footer>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      icons: [
+        'mdi-facebook',
+        'mdi-twitter',
+        'mdi-linkedin',
+        'mdi-instagram',
+      ],
+    }),
+  }
+</script>

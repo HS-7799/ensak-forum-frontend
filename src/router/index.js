@@ -1,0 +1,104 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
+
+import Profile from '../views/Profile.vue'
+import EditProfile from '../views/EditProfile.vue'
+
+import Admin from '../views/admin/Admin.vue'
+import Level from '../views/admin/Level.vue'
+import Speciality from '../views/admin/Speciality.vue'
+
+import Student from '../views/admin/Student.vue'
+import AddStudent from '../views/admin/student/AddStudent'
+import EditStudent from '../views/admin/student/EditStudent.vue'
+
+import Company from '../views/admin/Company.vue'
+import AddCompany from '../views/admin/company/AddCompany.vue'
+import EditCompany from '../views/admin/company/EditCompany.vue'
+
+
+
+import NotFound from '../components/NotFound.vue'
+import Forbidden from '../components/Forbidden.vue'
+
+
+Vue.use(VueRouter)
+
+const routes = [
+  {
+    path : '/admin',name : 'Admin',component : Admin,
+    children : [
+      {
+        path : 'levels', name : 'Admin / Level', component : Level
+      },
+      {
+        path : 'specialities', name : 'Admin / Speciality', component : Speciality
+      },
+      {
+        path : 'students', name : 'Admin / Student', component : Student,
+      },
+      {
+        path : 'students/create', name : 'Admin / Student / Create', component : AddStudent
+      },
+      {
+        path : 'students/:id/edit', name : 'Admin / Student / Edit', component : EditStudent
+      },
+      {
+        path : 'companies', name : 'Admin / Company', component : Company
+      },
+      {
+        path : 'companies/create', name : 'Admin / Company / Create', component : AddCompany
+      },
+      {
+        path : 'companies/:id/edit', name : 'Admin / Company / Edit', component : EditCompany
+      },
+    ]
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+    
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path : '/profile',
+    name : 'Profile',
+    component : Profile
+  },
+  {
+    path : '/editProfile/:id',
+    name : 'Edit Profile',
+    component : EditProfile
+  },
+  {
+    path : '/forbidden',
+    name : 'Error forbidden',
+    component : Forbidden
+  },
+  {
+    path : '*',
+    name : 'Error Not Found',
+    component : NotFound
+  }
+  
+]
+
+const router = new VueRouter({
+  routes,
+  mode : "history"
+})
+
+export default router
