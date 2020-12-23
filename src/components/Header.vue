@@ -36,10 +36,18 @@
                 </v-list-item-title>
               
               </v-list-item>
-              <v-list-item :to="{ name : 'Edit Profile', params : {id : getId} }" >
+              <v-list-item :to="{ name : 'Edit Profile'}" >
                 <v-list-item-title>
                   <v-icon>mdi-account</v-icon>
                   Edit Account
+                </v-list-item-title>
+              
+              </v-list-item>
+
+              <v-list-item :to="{ name : 'Students' }" >
+                <v-list-item-title>
+                  <v-icon></v-icon>
+                  All students
                 </v-list-item-title>
               
               </v-list-item>
@@ -75,6 +83,10 @@
               </v-btn>
               </template>
               <template v-else >
+                <v-btn text  :to="{ name : 'Students' }">
+                  <v-icon></v-icon>
+                  All students
+                </v-btn>
                 <app-avatar></app-avatar>
               </template>
 

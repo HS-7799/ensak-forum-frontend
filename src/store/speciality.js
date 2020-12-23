@@ -1,5 +1,4 @@
 import axios from 'axios'
-import authHeader from '../services/auth-header';
 
 
 const API_URL = 'http://localhost:8080/api'
@@ -31,7 +30,7 @@ const actions = {
     getSpecialities({commit})
     {
        
-      axios.get(API_URL + '/specialities',{ headers : authHeader() })
+      axios.get(API_URL + '/specialities')
       .then((res) => {
         commit("setSpecialities",res.data)
       }).catch((err) => {

@@ -80,10 +80,12 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { mapGetters } from 'vuex'
+import AuthHeader from '../services/auth-header';
 export default {
 
-    props : ['id'],
+    props : ['id','userId'],
     data()
     {
         return {
@@ -100,17 +102,66 @@ export default {
     },
     created()
     {
-
+      if(this.id !== null)
+      {
+        axios.get(`http://localhost:8080/api/students/${this.id}`)
+        .then((res) => {
+          this.description = res.data.description
+          this.level = res.data.level.id
+          this.speciality = res.data.speciality.id
+        }).catch((err) => {
+          if(err.response.status === 404)
+          {
+            this.$router.push('/notFound')
+          }
+        });
+      }
       this.$store.dispatch('getLevels')
       this.$store.dispatch('getSpecialities')
     },
     methods : {
         submit()
         {
-          console.log(this.files);   
-          console.log(this.description);   
-          console.log(this.level);   
-          console.log(this.speciality);   
+          
+          const form = {
+            user : {
+              id : this.userId
+            },
+            level : {
+              id : this.level
+            },
+            speciality : {
+              id : this.speciality
+            },
+            description : this.description,
+            cv : ""
+          }
+          
+          this.isLoading = true
+          if(this.id !== null)
+          {
+            console.log('put');
+            
+            axios.put(`http://localhost:8080/api/students/${this.id}`,form,{headers : AuthHeader()})
+            .then(() => {
+              this.isLoading = false
+            })
+            .catch(() => {
+              this.isLoading = false
+            });
+          } else {
+            console.log(form);
+            axios.post(`http://localhost:8080/api/students`,form)
+            .then(() => {
+              this.isLoading = false
+              this.errors = []
+            })
+            .catch((err) => {
+              this.errors = ['level and speciality are required']
+              console.log(err.response.data);
+              this.isLoading = false
+            });
+          }       
         }
     },
     computed : {

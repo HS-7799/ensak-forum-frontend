@@ -3,27 +3,27 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import AllStudents from '../views/AllStudents.vue';
+import OneStudent from '../views/OneStudent.vue';
+
 
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
 
+// adddmiiin
 import Admin from '../views/admin/Admin.vue'
 import Level from '../views/admin/Level.vue'
 import Speciality from '../views/admin/Speciality.vue'
-
 import Student from '../views/admin/Student.vue'
 import AddStudent from '../views/admin/student/AddStudent'
 import EditStudent from '../views/admin/student/EditStudent.vue'
-
 import Company from '../views/admin/Company.vue'
 import AddCompany from '../views/admin/company/AddCompany.vue'
 import EditCompany from '../views/admin/company/EditCompany.vue'
 
 
-
 import NotFound from '../components/NotFound.vue'
 import Forbidden from '../components/Forbidden.vue'
-
 
 Vue.use(VueRouter)
 
@@ -79,7 +79,7 @@ const routes = [
     component : Profile
   },
   {
-    path : '/editProfile/:id',
+    path : '/editProfile',
     name : 'Edit Profile',
     component : EditProfile
   },
@@ -87,6 +87,16 @@ const routes = [
     path : '/forbidden',
     name : 'Error forbidden',
     component : Forbidden
+  },
+  {
+    path : '/students',
+    name : 'Students',
+    component : AllStudents
+  },
+  {
+    path : '/students/:id',
+    name : 'Student',
+    component : OneStudent
   },
   {
     path : '*',

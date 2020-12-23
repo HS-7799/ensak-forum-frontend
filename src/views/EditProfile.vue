@@ -6,7 +6,7 @@
             <app-edit-password></app-edit-password>
         </v-col>
         <v-col cols="12" md="6" v-if="roles.includes('ROLE_ETUDIANT')" >
-          <app-edit-student-informations :id="id" ></app-edit-student-informations>
+          <app-edit-student-informations :id="id" :userId="userId" ></app-edit-student-informations>
         </v-col>
         <v-col cols="12" md="6" v-if="roles.includes('ROLE_ENTREPRISE')" >
           <app-edit-company-informations :id="id" ></app-edit-company-informations>
@@ -30,6 +30,7 @@ export default {
     return {
       roles : [],
       id : null,
+      userId : null,
       userInfo : {
         name : '',
         email : '',
@@ -47,7 +48,8 @@ export default {
 
     axios.get(API_URL + 'profile',{ headers : AuthHeader() })
     .then((res) => {
-        this.id = res.data.id
+      this.userId = res.data.id
+        this.id = res.data.student
         this.roles = res.data.roles.map(role => {
           return role.name
         })

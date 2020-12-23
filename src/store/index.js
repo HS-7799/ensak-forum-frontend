@@ -5,6 +5,7 @@ import createPersistedState from "vuex-persistedstate";
 import auth from './auth'
 import level from './level'
 import speciality from './speciality'
+import student from './student'
 
 Vue.use(Vuex)
 
@@ -21,7 +22,8 @@ export default new Vuex.Store({
   modules : {
     auth,
     level,
-    speciality
+    speciality,
+    student
   },
   plugins: [createPersistedState()]
 })

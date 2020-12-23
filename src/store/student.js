@@ -4,35 +4,35 @@ import axios from 'axios'
 const API_URL = 'http://localhost:8080/api'
 
 const state = {
-    levels : [],
+    students : [],
 }
 
 const getters = {
 
-    getLevels(state)
+    getStudents(state)
     {
-        return state.levels;
+        return state.students;
     }
 
 }
 
 const mutations = {
 
-    setLevels(state,levels)
+    setStudents(state,students)
     {
-        state.levels = levels;
+        state.students = students;
     }
 
 }
 
 const actions = {
 
-    getLevels({commit})
+    getStudents({commit})
     {
        
-      axios.get(API_URL + '/levels')
+      axios.get(API_URL + '/students')
       .then((res) => {
-        commit("setLevels",res.data)
+        commit("setStudents",res.data)
       }).catch((err) => {
         console.log(err.response.data);
       });

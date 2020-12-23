@@ -50,7 +50,7 @@
                 depressed
                 rounded
                 text
-                :to="{ name : 'Edit Profile', params : { id : id } }"
+                :to="{ name : 'Edit Profile'}"
               >
                 Edit Account
               </v-btn>

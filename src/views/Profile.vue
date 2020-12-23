@@ -1,5 +1,6 @@
 <template>
-  <v-card class="mx-auto mt-2" max-width="1000" tile>
+  <div>
+    <v-card class="mx-auto mt-2" max-width="1000" tile>
       <v-img height="200" src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"></v-img>
       <v-row style="margin:2.5%;position:absolute; top: 130px">
 
@@ -10,8 +11,8 @@
                     alt="John"
                   >
               </v-list-item-avatar>
-              <v-list-item-content class="mt-2" >
-                  <v-list-item-title class="title" style="margin-top:20px;">
+              <v-list-item-content style="margin-top:40px">
+                  <v-list-item-title class="title">
                     {{ name }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
@@ -29,6 +30,21 @@
             </v-list-item>
       </v-row>
   </v-card>
+  <v-container style="margin-top:60px" >
+      <v-row  >
+        <v-col cols="12" md="4" >
+          <v-card tile >
+            <v-card-text>
+              {{ email }}
+            </v-card-text>
+          </v-card>
+        </v-col>
+        <v-col cols="12" md="8" >
+          <p>akakaa</p>
+        </v-col>
+      </v-row>
+  </v-container>
+  </div>
 </template>
 <script>
 import axios from 'axios'
@@ -42,7 +58,7 @@ export default {
       id : null,
       name : null,
       email : null,
-      roles : null
+      roles : []
     }
   },
   created()
