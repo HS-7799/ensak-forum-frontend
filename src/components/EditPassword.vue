@@ -14,6 +14,9 @@
               <li>{{ error }}</li>
             </ul>
           </v-alert>
+          <v-alert type="success" v-if="message" >
+            {{ message }}
+          </v-alert>
           <v-form
             @submit.prevent="submit"
             ref="form"
@@ -73,11 +76,15 @@
 </template>
 
 <script>
+import axios from "axios";
+import AuthHeader from '../services/auth-header.js';
   export default {
+    props : ['userId'],
     data: () => ({
       isLoading : false,
       valid: true,
       errors : [],
+      message : null,
       oldPassword : '',
       newPassword : '',
       newPasswordConfirmation : '',
@@ -95,13 +102,34 @@
 
       submit()
       {
-        alert('submited')
+        const form = {
+          oldpassword : this.oldPassword,
+          newpassword : this.newPassword,
+          passwordconfirmation : this.newPasswordConfirmation
+
+        }
+
+        this.isLoading = true
+        axios.put(`http://localhost:8080/api/auth/profile/updatepassword/${this.userId}`,form,{headers : AuthHeader()})
+        .then((res) => {
+          this.message = res.data.message
+          this.errors = []
+          this.isLoading = false
+        }).catch((err) => {
+          if(err.response.data.details)
+          {
+            this.errors = err.response.data.details.split(',')
+          }
+          else if(err.response.data.message) {
+            this.errors = err.response.data.message.split(',')
+          }
+          this.errors.pop()
+          this.isLoading = false
+        });
       },
       
       clear() {
-        
         this.$refs.form.reset()
-        this.role = "student"
       },
     },
   }

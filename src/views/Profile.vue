@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="mx-auto mt-2" max-width="1000" tile>
+    <v-card class="mx-auto mt-2" max-width="1150" tile>
       <v-img height="200" src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"></v-img>
       <v-row style="margin:2.5%;position:absolute; top: 130px">
 
@@ -8,7 +8,7 @@
               <v-list-item-avatar size="100">
                   <img
                     src="https://www.w3schools.com/howto/img_avatar.png"
-                    alt="John"
+                    :alt="name"
                   >
               </v-list-item-avatar>
               <v-list-item-content style="margin-top:40px">
@@ -34,13 +34,13 @@
       <v-row  >
         <v-col cols="12" md="4" >
           <v-card tile >
+            <v-card-title>
+              Email
+            </v-card-title>
             <v-card-text>
               {{ email }}
             </v-card-text>
           </v-card>
-        </v-col>
-        <v-col cols="12" md="8" >
-          <p>akakaa</p>
         </v-col>
       </v-row>
   </v-container>
@@ -82,12 +82,16 @@ export default {
       this.name = res.data.name
       this.email = res.data.email
 
-        user.roles = res.data.roles.map(role => {
-          return role.name
-        })
+      user.roles = res.data.roles.map(role => {
+        return role.name
+      })
       this.$store.dispatch('setUser',user)
       this.id = res.data.id
       this.roles = user.roles
+      if(res.data.student !== null)
+      {
+        this.$router.push({name : 'Student' , params : { id : res.data.student }})
+      }
     }).catch((err) => {
       if(err.response.status === 500)
       {

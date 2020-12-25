@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
   export default {
     data () {
       return {
@@ -57,13 +58,21 @@
           { text: 'Cv', value: 'cv',sortable : false },
           { text : 'Actions', value : 'actions',sortable : false}
         ],
-        students :[]
+        // students :[]
       }
     },
     created()
     {
             this.$store.dispatch('getStudents')
-            this.students = this.$store.getters.getStudents.map(student => {
+            
+    },
+    computed : {
+      ...mapGetters([
+        'getStudents'
+      ]),
+      students()
+      {
+        return this.getStudents.map(student => {
                     return {
                             id : student.id,
                             name : student.user.name,
@@ -75,6 +84,7 @@
                             cv : student.cv,
                     }
             })
+      }
     },
     methods : {
       editStudent(id)

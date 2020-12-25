@@ -140,7 +140,6 @@ export default {
           this.isLoading = true
           if(this.id !== null)
           {
-            console.log('put');
             
             axios.put(`http://localhost:8080/api/students/${this.id}`,form,{headers : AuthHeader()})
             .then(() => {
@@ -150,15 +149,13 @@ export default {
               this.isLoading = false
             });
           } else {
-            console.log(form);
             axios.post(`http://localhost:8080/api/students`,form)
             .then(() => {
               this.isLoading = false
               this.errors = []
             })
-            .catch((err) => {
+            .catch(() => {
               this.errors = ['level and speciality are required']
-              console.log(err.response.data);
               this.isLoading = false
             });
           }       

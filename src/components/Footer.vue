@@ -5,6 +5,7 @@
     padless
   >
     <v-card
+    width="100%"
       flat
       tile
       class="blue-grey darken-4 text-center"
@@ -23,9 +24,9 @@
       </v-card-text>
 
       <v-card-text class=" pt-0">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate asperiores id eum pariatur aliquid aperiam nam delectus esse? Quidem doloremque odio nam ipsam tempore laboriosam iusto ullam commodi nihil suscipit?
-        </p>
+        
+          ENSAK Entreprise forum - All right are reserverd
+        
       </v-card-text>
 
       <v-divider></v-divider>
