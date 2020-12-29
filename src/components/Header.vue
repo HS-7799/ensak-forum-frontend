@@ -44,6 +44,13 @@
               
               </v-list-item>
 
+              <v-list-item :to="{ name : 'Companies' }" >
+                <v-list-item-title>
+                  <v-icon></v-icon>
+                  All companies
+                </v-list-item-title>
+              
+              </v-list-item>
               <v-list-item :to="{ name : 'Students' }" >
                 <v-list-item-title>
                   <v-icon></v-icon>
@@ -51,6 +58,7 @@
                 </v-list-item-title>
               
               </v-list-item>
+
               
             <v-list-item @click="logout" >
               <v-list-item-title>
@@ -83,6 +91,10 @@
               </v-btn>
               </template>
               <template v-else >
+                <v-btn text  :to="{ name : 'Companies' }">
+                  <v-icon></v-icon>
+                  All companies
+                </v-btn>
                 <v-btn text  :to="{ name : 'Students' }">
                   <v-icon></v-icon>
                   All students

@@ -92,6 +92,11 @@ export default {
           number : 15,
           name : 'Companies',
           color : 'brown lighten-1'
+        },
+         {
+          number : 5,
+          name : 'Activities',
+          color : 'yellow lighten-1'
         }
       ],
       drawer: false,
@@ -99,6 +104,7 @@ export default {
       routes : [
           { to : '/admin/levels', name : 'Levels' },
           { to : '/admin/specialities', name : 'Specialities' },
+          { to : '/admin/activities', name : 'Activities' },
           { to : '/admin/students', name : 'Students' },
           { to : '/admin/Companies', name : 'Companies' },
       ]

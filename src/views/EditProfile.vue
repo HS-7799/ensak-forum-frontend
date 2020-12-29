@@ -9,7 +9,7 @@
           <app-edit-student-informations :id="id" :userId="userId" ></app-edit-student-informations>
         </v-col>
         <v-col cols="12" md="6" v-if="roles.includes('ROLE_ENTREPRISE')" >
-          <app-edit-company-informations :id="id" ></app-edit-company-informations>
+          <app-edit-company-informations :id="id" :userId="userId" ></app-edit-company-informations>
         </v-col>
       </v-row>
     </v-container>
@@ -48,11 +48,18 @@ export default {
 
     axios.get(API_URL + 'profile',{ headers : AuthHeader() })
     .then((res) => {
-      this.userId = res.data.id
-        this.id = res.data.student
+        this.userId = res.data.id
         this.roles = res.data.roles.map(role => {
           return role.name
         })
+        if(res.data.student !== null && this.roles.includes('ROLE_ETUDIANT'))
+        {
+          this.id = res.data.student
+        }
+        if(res.data.company !== null && this.roles.includes('ROLE_ENTREPRISE'))
+        {
+          this.id = res.data.company
+        }
         this.userInfo = {
           name : res.data.name,
           username : res.data.username ,

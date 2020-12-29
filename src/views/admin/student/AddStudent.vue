@@ -1,5 +1,8 @@
 <template>
   <v-stepper v-model="e" vertical>
+    <h2 style="padding:10px" >
+              {{ this.$route.name }}
+    </h2>
     <v-stepper-step :complete="e > 1" color="#4BBAFC" step="1" :rules="[() => errors1.length > 0 ? false : true]" >
       User informations
     </v-stepper-step>

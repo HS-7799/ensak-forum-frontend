@@ -3,8 +3,12 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+
 import AllStudents from '../views/AllStudents.vue';
 import OneStudent from '../views/OneStudent.vue';
+
+import AllCompanies from '../views/AllCompanies.vue';
+import OneCompany from '../views/OneCompany.vue';
 
 
 import Profile from '../views/Profile.vue'
@@ -14,6 +18,7 @@ import EditProfile from '../views/EditProfile.vue'
 import Admin from '../views/admin/Admin.vue'
 import Level from '../views/admin/Level.vue'
 import Speciality from '../views/admin/Speciality.vue'
+import ActivityArea from '../views/admin/ActivityArea.vue'
 import Student from '../views/admin/Student.vue'
 import AddStudent from '../views/admin/student/AddStudent'
 import EditStudent from '../views/admin/student/EditStudent.vue'
@@ -36,6 +41,9 @@ const routes = [
       },
       {
         path : 'specialities', name : 'Admin / Speciality', component : Speciality
+      },
+      {
+        path : 'activities', name : 'Admin / Activity Areas', component : ActivityArea
       },
       {
         path : 'students', name : 'Admin / Student', component : Student,
@@ -97,6 +105,16 @@ const routes = [
     path : '/students/:id',
     name : 'Student',
     component : OneStudent
+  },
+  {
+    path : '/companies',
+    name : 'Companies',
+    component : AllCompanies
+  },
+  {
+    path : '/companies/:id',
+    name : 'Company',
+    component : OneCompany
   },
   {
     path : '*',

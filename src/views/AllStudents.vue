@@ -1,8 +1,17 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row v-if="students.length > 0" >
       <v-col cols="12" v-for="student in students" :key="student.id"  >
           <app-single-student :student="student" ></app-single-student>
+      </v-col>
+    </v-row>
+    <v-row v-else >
+      <v-col cols="12" >
+          <v-card>
+            <v-card-title>
+              No students available
+            </v-card-title>
+          </v-card>
       </v-col>
     </v-row>
   </v-container>

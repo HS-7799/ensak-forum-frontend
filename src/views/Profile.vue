@@ -88,9 +88,13 @@ export default {
       this.$store.dispatch('setUser',user)
       this.id = res.data.id
       this.roles = user.roles
-      if(res.data.student !== null)
+      if(res.data.student !== null && user.roles.includes('ROLE_ETUDIANT'))
       {
         this.$router.push({name : 'Student' , params : { id : res.data.student }})
+      }
+      if(res.data.company !== null && user.roles.includes('ROLE_ENTREPRISE'))
+      {
+        this.$router.push({name : 'Company' , params : { id : res.data.company }})
       }
     }).catch((err) => {
       if(err.response.status === 500)

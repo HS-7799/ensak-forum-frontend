@@ -17,7 +17,7 @@
                 <v-text-field
                 v-model="name"
                 :rules="nameRules"
-                label="Level name"
+                label="Activity name"
                 required
                 ></v-text-field>
               <v-btn
@@ -41,16 +41,16 @@
         </v-form>
         </v-card-text>
       </v-card>
-      <v-card class="mx-auto mt-2" max-width="70%" v-if="levels.length > 0" >
+      <v-card class="mx-auto mt-2" max-width="70%" v-if="activities.length > 0" >
         <v-card-text>
-          <div class="row"  v-for="(level,index) in levels" :key="level.id" >
-            <h3 class="col-9">{{ level.label }}</h3>
+          <div class="row"  v-for="(activity,index) in activities" :key="activity.id" >
+            <h3 class="col-9">{{ activity.label }}</h3>
                     
             <div class="col-3">
-              <v-btn icon color="green" @click="startEditing(level,index)" >
+              <v-btn icon color="green" @click="startEditing(activity,index)" >
                 <v-icon>mdi-wrench</v-icon>
               </v-btn>
-              <v-btn icon color="red" @click="deleteLevel(level.id,index)"  >
+              <v-btn icon color="red" @click="deleteActivity(activity.id,index)"  >
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
             </div>
@@ -74,19 +74,19 @@ export default {
       valid : true,
       nameRules : [
         v => !!v || 'Name is required',
-        v => (v && v.length >= 5) || 'Level name should have at least 5 characters',
+        v => (v && v.length >= 5) || 'Activity area name should have at least 5 characters',
 
       ],
       errors : [],
-      levels : []
+      activities : []
     }
   },
   created()
   {
     const API_URL = 'http://localhost:8080/api'
-      axios.get(API_URL + '/levels',{ headers : authHeader() })
+      axios.get(API_URL + '/activityareas',{ headers : authHeader() })
       .then((res) => {
-        this.levels = res.data;
+        this.activities = res.data;
       }).catch((err) => {
         this.handleError(err)
       });
@@ -127,53 +127,53 @@ export default {
 
       if(this.isEditing)
       {
-        this.updateLevel(form)
+        this.updateActivity(form)
       } else {
-        this.addLevel(form)
+        this.addActivity(form)
       }
       
 
     },
-    addLevel(form)
+    addActivity(form)
     {
       this.isLoading = true
       const API_URL = 'http://localhost:8080/api'
-      axios.post(API_URL + '/levels',form, { headers : authHeader() })
+      axios.post(API_URL + '/activityareas',form, { headers : authHeader() })
       .then((res) => {
         this.isLoading = false
-        this.levels.unshift(res.data)
+        this.activities.unshift(res.data)
         this.errors = []
         this.reset()
       }).catch((err) => {
         this.handleError(err)
       });
     },
-    updateLevel(form)
+    updateActivity(form)
     {
       const API_URL = 'http://localhost:8080/api'
-      axios.put(API_URL + `/levels/${this.idEdit}`,form, { headers : authHeader() })
+      axios.put(API_URL + `/activityareas/${this.idEdit}`,form, { headers : authHeader() })
       .then((res) => {
-        this.levels[this.indexEdit] = res.data
+        this.activities[this.indexEdit] = res.data
         this.cancel()
         this.reset()
       }).catch((err) => {
         this.handleError(err)
       });
     },
-    startEditing(level,index)
+    startEditing(activity,index)
     {
       this.isEditing = true
-      this.name = level.label
-      this.idEdit = level.id;
+      this.name = activity.label
+      this.idEdit = activity.id;
       this.indexEdit = index
       this.errors = []
     },
-    deleteLevel(id,index)
+    deleteActivity(id,index)
     {
       const API_URL = 'http://localhost:8080/api'
-      axios.delete(API_URL + `/levels/${id}`, { headers : authHeader() })
+      axios.delete(API_URL + `/activityareas/${id}`, { headers : authHeader() })
       .then(() => {
-        this.levels.splice(index,1)
+        this.activities.splice(index,1)
         this.errors = []
         this.reset()
       }).catch((err) => {

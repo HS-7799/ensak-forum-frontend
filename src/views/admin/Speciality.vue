@@ -17,7 +17,6 @@
                 <v-text-field
                 v-model="name"
                 :rules="nameRules"
-                :counter="5"
                 label="Speciality name"
                 required
                 ></v-text-field>
