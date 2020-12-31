@@ -17,7 +17,7 @@
                 <v-text-field
                 v-model="name"
                 :rules="nameRules"
-                label="Speciality name"
+                label="Activity name"
                 required
                 ></v-text-field>
               <v-btn
@@ -41,16 +41,16 @@
         </v-form>
         </v-card-text>
       </v-card>
-      <v-card class="mx-auto mt-2" max-width="70%" v-if="specialities.length > 0" >
+      <v-card class="mx-auto mt-2" max-width="70%" v-if="activities.length > 0" >
         <v-card-text>
-          <div class="row"  v-for="(speciality,index) in specialities" :key="speciality.id" >
-            <h3 class="col-9">{{ speciality.label }}</h3>
+          <div class="row"  v-for="(activity,index) in activities" :key="activity.id" >
+            <h3 class="col-9">{{ activity.label }}</h3>
                     
             <div class="col-3">
-              <v-btn icon color="green" @click="startEditing(speciality,index)" >
+              <v-btn icon color="green" @click="startEditing(activity,index)" >
                 <v-icon>mdi-wrench</v-icon>
               </v-btn>
-              <v-btn icon color="red" @click="deleteSpeciality(speciality.id,index)"  >
+              <v-btn icon color="red" @click="deleteActivity(activity.id,index)"  >
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
             </div>
@@ -62,7 +62,7 @@
 
 <script>
 import axios from 'axios';
-import authHeader from '../../services/auth-header';
+import authHeader from '../../../services/auth-header';
 export default {
 
   data()
@@ -74,18 +74,19 @@ export default {
       valid : true,
       nameRules : [
         v => !!v || 'Name is required',
-        v => (v && v.length >= 5) || 'Speciality name should have at least 5 characters',
+        v => (v && v.length >= 5) || 'Activity area name should have at least 5 characters',
+
       ],
       errors : [],
-      specialities : []
+      activities : []
     }
   },
   created()
   {
     const API_URL = 'http://localhost:8080/api'
-      axios.get(API_URL + '/specialities',{ headers : authHeader() })
+      axios.get(API_URL + '/activityareas',{ headers : authHeader() })
       .then((res) => {
-        this.specialities = res.data;
+        this.activities = res.data;
       }).catch((err) => {
         this.handleError(err)
       });
@@ -123,69 +124,66 @@ export default {
         name : this.name,
         label : this.name.charAt(0).toUpperCase() + this.name.slice(1)
       }
-      
+
       if(this.isEditing)
       {
-        this.updateSpeciality(form)
+        this.updateActivity(form)
       } else {
-        this.addSpeciality(form)
+        this.addActivity(form)
       }
       
 
     },
-    addSpeciality(form)
+    addActivity(form)
     {
       this.isLoading = true
       const API_URL = 'http://localhost:8080/api'
-      axios.post(API_URL + '/specialities',form, { headers : authHeader() })
+      axios.post(API_URL + '/activityareas',form, { headers : authHeader() })
       .then((res) => {
-        this.specialities.unshift(res.data)
+        this.isLoading = false
+        this.activities.unshift(res.data)
         this.errors = []
         this.reset()
-        this.isLoading = false
       }).catch((err) => {
         this.handleError(err)
       });
     },
-    updateSpeciality(form)
+    updateActivity(form)
     {
       const API_URL = 'http://localhost:8080/api'
-      axios.put(API_URL + `/specialities/${this.idEdit}`,form, { headers : authHeader() })
+      axios.put(API_URL + `/activityareas/${this.idEdit}`,form, { headers : authHeader() })
       .then((res) => {
-        this.specialities[this.indexEdit] = res.data
+        this.activities[this.indexEdit] = res.data
         this.cancel()
         this.reset()
       }).catch((err) => {
-                this.handleError(err)
-
+        this.handleError(err)
       });
     },
-    startEditing(speciality,index)
+    startEditing(activity,index)
     {
       this.isEditing = true
-      this.name = speciality.label
-      this.idEdit = speciality.id;
+      this.name = activity.label
+      this.idEdit = activity.id;
       this.indexEdit = index
       this.errors = []
     },
-    deleteSpeciality(id,index)
+    deleteActivity(id,index)
     {
       const API_URL = 'http://localhost:8080/api'
-      axios.delete(API_URL + `/specialities/${id}`, { headers : authHeader() })
+      axios.delete(API_URL + `/activityareas/${id}`, { headers : authHeader() })
       .then(() => {
-        this.specialities.splice(index,1)
+        this.activities.splice(index,1)
         this.errors = []
         this.reset()
       }).catch((err) => {
-          this.handleError(err)
-
+        this.handleError(err)
       });
     },
     cancel()
     {
       this.errors = []
       this.isEditing = false;
-      this.isLoading = false
       this.idEdit = null
       this.indexEdit = null
       this.reset()

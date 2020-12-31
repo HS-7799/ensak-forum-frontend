@@ -7,6 +7,14 @@
       >
         <v-list>
           <v-list-item-group>
+            <v-list-item :to="{ name : 'Posts' }" >
+                <v-list-item-title>
+                  <v-icon></v-icon>
+                  Posts
+                </v-list-item-title>
+              
+              </v-list-item>
+              <v-divider></v-divider>
             <template v-if="!getLoggedIn">
               <v-list-item :to="{ name : 'Login' }"  >
               <v-list-item-title>
@@ -44,22 +52,24 @@
               
               </v-list-item>
 
+              <v-divider></v-divider>
+              
               <v-list-item :to="{ name : 'Companies' }" >
                 <v-list-item-title>
                   <v-icon></v-icon>
-                  All companies
+                  Companies
                 </v-list-item-title>
               
               </v-list-item>
               <v-list-item :to="{ name : 'Students' }" >
                 <v-list-item-title>
                   <v-icon></v-icon>
-                  All students
+                  Students
                 </v-list-item-title>
               
               </v-list-item>
 
-              
+            <v-divider></v-divider>
             <v-list-item @click="logout" >
               <v-list-item-title>
                 <v-icon>mdi-logout</v-icon>
@@ -75,11 +85,15 @@
           <v-app-bar-nav-icon class="d-flex d-sm-none" @click.stop="drawer = !drawer" ></v-app-bar-nav-icon>
           <v-toolbar-title>
             <router-link to="/" tag="span" style="cursor:pointer" >
-              <img src="../assets/logo.png" alt="" width="150px" class="pt-2">
+              <img src="../../assets/logo.png" alt="" width="150px" class="pt-2">
             </router-link>
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items class="d-none d-sm-flex" >
+              <v-btn text  :to="{ name : 'Posts' }">
+                  <v-icon></v-icon>
+                  Posts
+                </v-btn>
               <template v-if="!getLoggedIn">
                 <v-btn text  :to="{ name : 'Login' }"  >
                   <v-icon>mdi-login</v-icon>
@@ -91,13 +105,14 @@
               </v-btn>
               </template>
               <template v-else >
+                
                 <v-btn text  :to="{ name : 'Companies' }">
                   <v-icon></v-icon>
-                  All companies
+                  Companies
                 </v-btn>
                 <v-btn text  :to="{ name : 'Students' }">
                   <v-icon></v-icon>
-                  All students
+                  Students
                 </v-btn>
                 <app-avatar></app-avatar>
               </template>
@@ -108,9 +123,9 @@
 </template>
 
 <script>
-import User from '../Helpers/User'
+import User from '../../Helpers/User'
 import {mapGetters} from 'vuex'
-import Avatar from './Avatar'
+import Avatar from '../Avatar'
 export default {
   name: 'App',
   data: () => ({

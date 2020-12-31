@@ -57,7 +57,7 @@
 <script>
 import {mapGetters} from 'vuex'
 import axios from 'axios'
- import User from '../Helpers/User'
+ import User from '../../Helpers/User'
   export default {
     data: () => ({
       isLoading : false,

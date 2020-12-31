@@ -19,7 +19,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import SingleStudent from '../components/SingleStudent'
+import SingleStudent from '../../components/SingleStudent'
 export default {
     
     created()

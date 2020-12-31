@@ -1,0 +1,114 @@
+<template>
+  <v-row style="justify-content:center" >
+    <v-col cols="12" md="9">
+      <v-card id="card" @click="showPost">
+        <v-list-item id="companyLogo" >
+              <v-list-item-avatar size="50">
+                  <img
+                    src="https://www.w3schools.com/howto/img_avatar.png"
+                  >
+              </v-list-item-avatar>
+              <v-list-item-title style="margin-top:10%" >
+                {{ post.company.user.name }} - {{ post.location }}
+              </v-list-item-title>
+        </v-list-item>
+        <v-card-title class="primary--text">
+          <h3>{{ post.title }}</h3>
+        </v-card-title>
+        <v-card-text>
+          <p class="black--text" >
+            {{ post.body }}
+          </p>
+          <span>
+            Published At {{ formatDate(post.createdAt) }}
+          </span>
+        </v-card-text>
+        <v-card-actions>
+          <template v-if="isEdited" >
+            <v-btn icon @click="editPost" >
+              <v-icon icon>
+                mdi-wrench
+              </v-icon>
+            </v-btn>
+            <v-btn icon @click.stop="deletePost" >
+              <v-icon icon color="red" >
+                mdi-delete
+              </v-icon>
+            </v-btn>
+          </template>
+          <v-spacer></v-spacer>
+          <v-btn icon color="deep-orange" title="Apply" v-if="getRoles.includes('ROLE_ETUDIANT')" >
+            <v-icon>mdi-send</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-col>
+  </v-row>
+</template>
+
+<script>
+import axios from 'axios';
+import { mapGetters } from 'vuex';
+import authHeader from '../../services/auth-header';
+export default {
+  props : ['post'],
+  methods : {
+    showPost()
+    {
+      this.$router.push({name : 'Post',params : { id : this.post.id }})
+    },
+    editPost()
+    {
+      this.$router.push({name : 'Edit Post',params : { id : this.post.id }})
+    },
+    deletePost()
+    { 
+      axios.delete(`http://localhost:8080/api/posts/${this.post.id}`,{headers : authHeader()})
+      .then(() => {
+        this.$store.dispatch("removePost",this.post)
+      })
+    },
+    formatDate (input) {
+      var datePart = input.match(/\d+/g),
+      year = datePart[0].substring(2), //get only two digits
+      month = datePart[1], day = datePart[2];
+
+      return day+'/'+month+'/'+year;
+    }
+  },
+  computed : {
+    ...mapGetters([
+      'getCompanyId',
+      'getRoles'
+    ]),
+    isEdited()
+    {
+      return (this.post.company.id === this.getCompanyId) || this.getRoles.includes("ROLE_ADMIN")
+    }
+  }
+
+
+}
+</script>
+
+<style scoped >
+#card
+{
+  cursor: pointer;
+  position:relative;
+  padding: 10px;
+  margin : 15px 0;
+}
+#card:hover
+{
+  box-shadow: 0px 2px 10px gray;
+}
+#companyLogo
+{
+  z-index: 10;
+  position: absolute;
+  left: 0;
+  top: -15%;
+
+}
+</style>

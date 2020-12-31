@@ -94,6 +94,7 @@ export default {
       }
       if(res.data.company !== null && user.roles.includes('ROLE_ENTREPRISE'))
       {
+        this.$store.dispatch("setCompanyId",res.data.company)
         this.$router.push({name : 'Company' , params : { id : res.data.company }})
       }
     }).catch((err) => {

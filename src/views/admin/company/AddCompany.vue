@@ -109,7 +109,7 @@
                     :items="activityareas"
                     item-value="id"
                     item-text="label"
-                    label="activityarea"
+                    label="activity area"
                 ></v-select>
 
                     

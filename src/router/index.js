@@ -1,28 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
+import Login from '../views/authentication/Login.vue'
+import Register from '../views/authentication/Register.vue'
 
-import AllStudents from '../views/AllStudents.vue';
-import OneStudent from '../views/OneStudent.vue';
+import AllStudents from '../views/student/AllStudents.vue';
+import OneStudent from '../views/student/OneStudent.vue';
 
-import AllCompanies from '../views/AllCompanies.vue';
-import OneCompany from '../views/OneCompany.vue';
+import AllCompanies from '../views/company/AllCompanies.vue';
+import OneCompany from '../views/company/OneCompany.vue';
+
+import AllPosts from '../views/post/AllPosts.vue'
+import ShowPost from '../views/post/ShowPost.vue'
+import EditPost from '../views/post/EditPost.vue'
 
 
 import Profile from '../views/Profile.vue'
 import EditProfile from '../views/EditProfile.vue'
 
-// adddmiiin
-import Admin from '../views/admin/Admin.vue'
-import Level from '../views/admin/Level.vue'
-import Speciality from '../views/admin/Speciality.vue'
-import ActivityArea from '../views/admin/ActivityArea.vue'
-import Student from '../views/admin/Student.vue'
+// admin
+import Dashboard from '../views/admin/Dashboard.vue'
+import Level from '../views/admin/level/Level.vue'
+import Speciality from '../views/admin/speciality/Speciality.vue'
+import ActivityArea from '../views/admin/activity/ActivityArea.vue'
+
+import Student from '../views/admin/student/Student.vue'
 import AddStudent from '../views/admin/student/AddStudent'
 import EditStudent from '../views/admin/student/EditStudent.vue'
-import Company from '../views/admin/Company.vue'
+
+import Company from '../views/admin/company/Company.vue'
 import AddCompany from '../views/admin/company/AddCompany.vue'
 import EditCompany from '../views/admin/company/EditCompany.vue'
 
@@ -34,7 +40,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path : '/admin',name : 'Admin',component : Admin,
+    path : '/admin',name : 'Admin',component : Dashboard,
     children : [
       {
         path : 'levels', name : 'Admin / Level', component : Level
@@ -92,11 +98,6 @@ const routes = [
     component : EditProfile
   },
   {
-    path : '/forbidden',
-    name : 'Error forbidden',
-    component : Forbidden
-  },
-  {
     path : '/students',
     name : 'Students',
     component : AllStudents
@@ -112,9 +113,29 @@ const routes = [
     component : AllCompanies
   },
   {
+    path : '/posts',
+    name : 'Posts',
+    component : AllPosts
+  },
+  {
+    path : '/posts/:id',
+    name : 'Post',
+    component : ShowPost
+  },
+  {
+    path : '/posts/:id/edit',
+    name : 'Edit Post',
+    component : EditPost
+  },
+  {
     path : '/companies/:id',
     name : 'Company',
     component : OneCompany
+  },
+  {
+    path : '/forbidden',
+    name : 'Error forbidden',
+    component : Forbidden
   },
   {
     path : '*',

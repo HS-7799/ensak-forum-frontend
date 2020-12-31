@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import Header from './components/Header'
-import Footer from './components/Footer'
+import Header from './components/shared/Header'
+import Footer from './components/shared/Footer'
 import User from './Helpers/User'
 export default {
   name: 'App',
@@ -29,11 +29,11 @@ export default {
     this.$Progress.start()
     this.$router.beforeEach((to, from, next) => {
 
-      const publicRoutes = ['/login','/register','/']
+      const publicRoutes = ['/login','/register','/','/posts']
       
       if(!User.loggedIn(username) && !publicRoutes.includes(to.path))
       {
-        console.log('');
+        //
       }
 
       if (to.meta.progress !== undefined) {

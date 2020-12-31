@@ -8,6 +8,7 @@ import speciality from './speciality'
 import activities from './activities'
 import student from './student'
 import company from './company'
+import post from './post'
 
 Vue.use(Vuex)
 
@@ -27,7 +28,8 @@ export default new Vuex.Store({
     speciality,
     student,
     company,
-    activities
+    activities,
+    post
   },
   plugins: [createPersistedState()]
 })

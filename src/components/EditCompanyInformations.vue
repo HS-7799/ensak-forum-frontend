@@ -58,15 +58,15 @@
           </v-file-input>
                 
             
-        <v-btn
-            :disabled="!valid"
-            :loading="isLoading"
-            color="primary"
-            class="mr-4"
-            @click="submit"
-        >
-            Update
-        </v-btn>
+          <v-btn
+              :disabled="!valid"
+              :loading="isLoading"
+              color="primary"
+              class="mr-4"
+              @click="submit"
+          >
+              Update
+          </v-btn>
 
             </v-form>
         </v-col>

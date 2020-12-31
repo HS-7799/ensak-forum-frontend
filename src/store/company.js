@@ -6,6 +6,7 @@ const API_URL = 'http://localhost:8080/api'
 
 const state = {
     companies : [],
+    id : null,
     isGettingCompanies : false,
 }
 
@@ -14,6 +15,11 @@ const getters = {
     getCompanies(state)
     {
         return state.companies;
+    },
+
+    getCompanyId(state)
+    {
+        return state.id;
     },
 
     isGettingCompanies(state)
@@ -28,6 +34,11 @@ const mutations = {
     setCompanies(state,companies)
     {
         state.companies = companies;
+    },
+
+    setId(state,id)
+    {
+        state.id = id
     },
 
     removeCompany(state,item)
@@ -55,6 +66,11 @@ const actions = {
             commit('switchIsGettingCompanies',false)
             console.log(err.response.data);
         });
+    },
+
+    setCompanyId({commit},id)
+    {
+        commit("setId",id)
     },
 
     deleteCompany({commit},item)

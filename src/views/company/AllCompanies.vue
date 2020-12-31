@@ -10,7 +10,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import SingleCompany from '../components/SingleCompany'
+import SingleCompany from '../../components/SingleCompany'
 export default {
     
     created()

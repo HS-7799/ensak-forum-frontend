@@ -72,7 +72,7 @@
   </div>
 </template>
 <script>
-import AuthHeader from '../services/auth-header';
+import AuthHeader from '../../services/auth-header';
 import axios from 'axios'
 export default {
   name: 'Company',
