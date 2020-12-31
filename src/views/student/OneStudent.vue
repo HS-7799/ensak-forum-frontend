@@ -63,8 +63,8 @@
             </v-card-text>
           </v-card>
         </v-col>
-        <v-col cols="12" md="8" >
-          here all my posts
+        <v-col col="12">
+          <app-carousel-posts></app-carousel-posts>
         </v-col>
       </v-row>
   </v-container>
@@ -72,6 +72,7 @@
 </template>
 <script>
 import axios from 'axios'
+import CarouselPosts from '../../components/CarouselPosts.vue'
 export default {
   name: 'Student',
   data()
@@ -108,6 +109,9 @@ export default {
         this.$router.push('/notFound')
       }
     });
+  },
+  components : {
+    appCarouselPosts : CarouselPosts
   }
   
 }

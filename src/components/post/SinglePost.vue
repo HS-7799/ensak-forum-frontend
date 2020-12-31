@@ -9,17 +9,18 @@
                   >
               </v-list-item-avatar>
               <v-list-item-title style="margin-top:10%" >
-                {{ post.company.user.name }} - {{ post.location }}
+                <h5>{{ post.company.user.name }} - {{ post.location }}</h5>
               </v-list-item-title>
+              
         </v-list-item>
         <v-card-title class="primary--text">
           <h3>{{ post.title }}</h3>
         </v-card-title>
-        <v-card-text>
-          <p class="black--text" >
+        <v-card-text  >
+          <p class="black--text" id="card-text" >
             {{ post.body }}
           </p>
-          <span>
+          <span style="display:block">
             Published At {{ formatDate(post.createdAt) }}
           </span>
         </v-card-text>
@@ -30,7 +31,7 @@
                 mdi-wrench
               </v-icon>
             </v-btn>
-            <v-btn icon @click.stop="deletePost" >
+            <v-btn icon @click.stop="$store.dispatch('deletePost',post)" >
               <v-icon icon color="red" >
                 mdi-delete
               </v-icon>
@@ -47,9 +48,7 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { mapGetters } from 'vuex';
-import authHeader from '../../services/auth-header';
 export default {
   props : ['post'],
   methods : {
@@ -60,13 +59,6 @@ export default {
     editPost()
     {
       this.$router.push({name : 'Edit Post',params : { id : this.post.id }})
-    },
-    deletePost()
-    { 
-      axios.delete(`http://localhost:8080/api/posts/${this.post.id}`,{headers : authHeader()})
-      .then(() => {
-        this.$store.dispatch("removePost",this.post)
-      })
     },
     formatDate (input) {
       var datePart = input.match(/\d+/g),
@@ -91,7 +83,7 @@ export default {
 }
 </script>
 
-<style scoped >
+<style >
 #card
 {
   cursor: pointer;
@@ -103,12 +95,21 @@ export default {
 {
   box-shadow: 0px 2px 10px gray;
 }
+#card-text
+{
+  display: inline-block;
+  max-height: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+
+}
 #companyLogo
 {
   z-index: 10;
   position: absolute;
   left: 0;
-  top: -15%;
+  top: -12%;
 
 }
 </style>

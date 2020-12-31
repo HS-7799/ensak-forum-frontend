@@ -30,7 +30,8 @@
         </v-card-title>
         <v-card-text>
           <v-container>
-            <v-row>
+            <v-form ref="form" @submit.prevent="addNewPost" >
+              <v-row>
                <v-col cols="12">
                 <v-text-field
                   label="Location*"
@@ -58,6 +59,7 @@
                 ></v-textarea>
               </v-col>
             </v-row>
+            </v-form>
           </v-container>
           <small>*indicates required field</small>
         </v-card-text>
@@ -134,6 +136,7 @@ import { mapGetters } from 'vuex';
         {
             this.dialog = false
             this.errors = []
+            this.$refs.form.reset()
         }
     }
   }

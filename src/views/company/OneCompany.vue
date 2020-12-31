@@ -65,7 +65,7 @@
           </v-card>
         </v-col>
         <v-col cols="12" md="8" >
-          here all my posts
+          <app-carousel-posts :posts="posts" v-if="posts.length > 0" ></app-carousel-posts>
         </v-col>
       </v-row>
   </v-container>
@@ -74,11 +74,13 @@
 <script>
 import AuthHeader from '../../services/auth-header';
 import axios from 'axios'
+import CarouselPosts from '../../components/CarouselPosts.vue'
 export default {
   name: 'Company',
   data()
   {
     return {
+      posts : [],
       user : {
         name : null,
         email : null
@@ -110,6 +112,17 @@ export default {
         this.$router.push('/notFound')
       }
     });
+
+    axios.get(API_URL + `companies/${this.$route.params.id}/posts`,{headers : AuthHeader()})
+    .then((res) => {
+      this.posts = res.data
+    })
+    .catch(err => {
+      console.log(err.response);
+    }) 
+  },
+  components : {
+    appCarouselPosts : CarouselPosts
   }
   
 }
