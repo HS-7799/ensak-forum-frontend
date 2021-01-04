@@ -20,7 +20,7 @@
             Published At {{ formatDate(post.createdAt) }}
       </span>
     </v-card-text>
-    <v-card-actions>
+    <v-card-actions v-if="!isLoading" >
           <template v-if="isEdited" >
             <v-btn icon @click="editPost" >
               <v-icon icon>
@@ -34,9 +34,9 @@
             </v-btn>
           </template>
           <v-spacer></v-spacer>
-          <v-btn text color="deep-orange" @click="apply" title="Apply" v-if="getRoles.includes('ROLE_ETUDIANT')" >
-            Apply now
-            <v-icon>mdi-send</v-icon>
+          <v-btn text color="deep-orange" :loading="isApplying" @click="submit" title="Apply" v-if="getRoles.includes('ROLE_ETUDIANT')" >
+            {{  isAlreadyApplied ? 'Quit' : 'Apply now'  }}
+            <v-icon v-if="!isAlreadyApplied" >mdi-send</v-icon>
           </v-btn>
         </v-card-actions>
   </v-card>
@@ -45,12 +45,15 @@
 <script>
 import { mapGetters } from 'vuex'
 import axios from 'axios'
+import AuthHeader from '../../services/auth-header'
 export default {
 
   data()
   {
     return {
       isLoading : false,
+      isApplying : false,
+      isAlreadyApplied : false,
       post : {
         id : null,
         location : null,
@@ -74,6 +77,10 @@ export default {
     .then((res) => {
       this.isLoading = false
       this.post = res.data
+      const studentsIds = this.post.students.map((student) => {
+        return student.id
+      })
+      this.isAlreadyApplied = studentsIds.includes(this.getStudentId)
     }).catch((err) => {
       if(err.response.status === 404)
       {
@@ -84,12 +91,12 @@ export default {
   computed : {
     ...mapGetters([
       'getCompanyId',
-      'getRoles'
+      'getRoles',
+      'getStudentId'
     ]),
     isEdited()
     {
         return (this.post.company.id === this.getCompanyId) || this.getRoles.includes("ROLE_ADMIN")
-      
     }
   },
   
@@ -107,13 +114,36 @@ export default {
               this.$router.push({name : 'Posts'})
       })
     },
+    submit()
+    {
+      this.isApplying = true
+      if(this.isAlreadyApplied)
+      {
+        this.quit()
+      } else {
+        this.apply()
+      }
+    },
+    quit()
+    {
+      axios.delete(`http://localhost:8080/api/posts/${this.post.id}/${this.getStudentId}`,{headers : AuthHeader()})
+      .then(() => {
+        this.isAlreadyApplied = false
+        this.isApplying = false
+      })
+    },
     apply()
     {
-      alert('apply for this post')
+      axios.post(`http://localhost:8080/api/posts/${this.post.id}/${this.getStudentId}`,{},{headers : AuthHeader()})
+      .then(() => {
+        this.isAlreadyApplied = true
+        this.isApplying = false
+      })
     },
     formatDate (input) {
       var datePart = input.match(/\d+/g),
-      year = datePart[0].substring(2), //get only two digits
+      year = datePart[0].substring(
+        2), //get only two digits
       month = datePart[1], day = datePart[2];
 
       return day+'/'+month+'/'+year;

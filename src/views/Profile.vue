@@ -90,6 +90,7 @@ export default {
       this.roles = user.roles
       if(res.data.student !== null && user.roles.includes('ROLE_ETUDIANT'))
       {
+        this.$store.dispatch("setStudentId",res.data.student)
         this.$router.push({name : 'Student' , params : { id : res.data.student }})
       }
       if(res.data.company !== null && user.roles.includes('ROLE_ENTREPRISE'))

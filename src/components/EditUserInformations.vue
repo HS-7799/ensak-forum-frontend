@@ -62,9 +62,11 @@
 </template>
 
 <script>
+import axios from 'axios'
+import AuthHeader from '../services/auth-header';
 export default {
 
-    props : ['userInfo'],
+    props : ['userId','userInfo'],
     data: () => ({
       isLoading : false,
       valid: true,
@@ -99,7 +101,20 @@ export default {
     methods : {
         submit()
         {
-            alert("form submited")
+          const form = {
+            username : this.username,
+            name : this.name,
+            email : this.email
+
+          }
+          this.isLoading=true
+          axios.put(`http://localhost:8080/api/auth/profile/update/${this.userId}` ,form,{headers : AuthHeader()})
+            .then(() => {
+              this.isLoading = false
+            })
+            .catch(() => {
+              this.isLoading = false
+            });
         }
     }
 

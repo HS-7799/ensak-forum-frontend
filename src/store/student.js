@@ -6,6 +6,7 @@ const API_URL = 'http://localhost:8080/api'
 
 const state = {
     students : [],
+    id : null,
     isGettingStudents : false,
 }
 
@@ -19,6 +20,11 @@ const getters = {
     isGettingStudents(state)
     {
         return state.isGettingStudents
+    },
+
+    getStudentId(state)
+    {
+        return state.id
     }
 
 }
@@ -38,6 +44,11 @@ const mutations = {
     switchIsGettingStudents(state,value)
     {
         state.isGettingStudents = value
+    },
+
+    setId(state,id)
+    {
+        state.id = id;
     }
 
 }
@@ -55,6 +66,11 @@ const actions = {
         commit('switchIsGettingStudents',false)
         console.log(err.response.data);
       });
+    },
+
+    setStudentId({commit},id)
+    {
+        commit("setId",id)
     },
 
     deleteStudent({commit},item)

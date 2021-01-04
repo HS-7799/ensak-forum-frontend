@@ -25,12 +25,12 @@
             :items="activityareas"
             item-value="id"
             item-text="label"
-            label="ACtivityarea"
+            label="ACtivity area"
           ></v-select>
           <v-textarea
               clearable
               clear-icon="mdi-close"
-              label="About you"
+              label="About"
               v-model="description"
             ></v-textarea>
             <v-text-field
@@ -41,7 +41,7 @@
                 ></v-text-field>
             <v-file-input
               v-model="files"
-              placeholder="Upload your logo"
+              placeholder="Upload logo"
               label="Logo"
               multiple
               prepend-icon="mdi-paperclip"

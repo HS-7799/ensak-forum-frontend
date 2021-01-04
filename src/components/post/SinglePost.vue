@@ -1,6 +1,4 @@
 <template>
-  <v-row style="justify-content:center" >
-    <v-col cols="12" md="9">
       <v-card id="card" @click="showPost">
         <v-list-item id="companyLogo" >
               <v-list-item-avatar size="50">
@@ -43,8 +41,6 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-col>
-  </v-row>
 </template>
 
 <script>

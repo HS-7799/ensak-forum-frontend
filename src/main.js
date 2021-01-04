@@ -8,9 +8,9 @@ import VueProgressBar from 'vue-progressbar'
 Vue.config.productionTip = false
 
 Vue.use(VueProgressBar, {
-  color: '#4BBAFC',
+  color: '#FFC806',
   failedColor: 'red',
-  height: '15px'
+  height: '20px'
 })
 
 

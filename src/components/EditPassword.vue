@@ -8,7 +8,7 @@
     <v-container>
       <v-row dense>
         <v-col cols="12">
-          <h2 style="text-align:center" >Change your password</h2>
+          <h2 style="text-align:center" >Change password</h2>
           <v-alert type="error" v-if="errors.length > 0" >
             <ul v-for="error in errors" :key="error" >
               <li>{{ error }}</li>

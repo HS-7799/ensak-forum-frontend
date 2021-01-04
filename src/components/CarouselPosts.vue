@@ -1,10 +1,10 @@
 <template>
     <v-carousel cycle height="310" hide-delimiter-background show-arrows-on-hover>
           <v-carousel-item v-for="post in posts" :key="post.id">
-            <v-sheet color="white" style="padding:5px 20px;" height="100%">
+            <v-sheet color="white" height="100%">
               <v-row class="fill-height" align="center" justify="center">
                 <div class="display-3">
-                    <v-card class="white black--text"
+                    <v-card min-width="500" class="white black--text"
                       @click="goToPost(post.id)"
                       style="cursor:pointer" >
                         <v-card-title>{{post.title}}</v-card-title>

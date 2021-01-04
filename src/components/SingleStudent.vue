@@ -1,5 +1,5 @@
 <template>
-    <v-card max-width="70%" class="mx-auto" >
+    <v-card class="mb-3" >
           <v-card-title>
             <v-avatar color="#FFC806" class="mr-2" >
               <span class="headline" >{{ getInitials(student.user.name) }}</span>

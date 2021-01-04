@@ -1,8 +1,16 @@
 <template>
   <v-container>
       <app-add-post v-if="canAddPosts" ></app-add-post>
+      
       <template v-if="posts.length > 0" >
-        <app-single-post v-for="post in posts" :key="post.id" :post="post" ></app-single-post>
+          <v-row>
+            <v-col cols="12" md="4">
+              filter by ?
+            </v-col>
+            <v-col cols="12" md="8">
+              <app-single-post v-for="post in posts" :key="post.id" :post="post" ></app-single-post>
+            </v-col>
+          </v-row>
       </template>
       <template v-else>
         <div>

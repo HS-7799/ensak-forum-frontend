@@ -65,7 +65,9 @@
           </v-card>
         </v-col>
         <v-col cols="12" md="8" >
+          <h3>My posts</h3>
           <app-carousel-posts :posts="posts" v-if="posts.length > 0" ></app-carousel-posts>
+          <h4 v-else >No posts available</h4>
         </v-col>
       </v-row>
   </v-container>
@@ -117,9 +119,6 @@ export default {
     .then((res) => {
       this.posts = res.data
     })
-    .catch(err => {
-      console.log(err.response);
-    }) 
   },
   components : {
     appCarouselPosts : CarouselPosts

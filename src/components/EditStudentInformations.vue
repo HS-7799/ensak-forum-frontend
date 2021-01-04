@@ -43,7 +43,7 @@
 
           <v-file-input
               v-model="files"
-              placeholder="Upload your resume"
+              placeholder="Upload resume"
               label="Resume"
               multiple
               prepend-icon="mdi-paperclip"
