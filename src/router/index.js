@@ -9,6 +9,7 @@ import OneStudent from '../views/student/OneStudent.vue';
 
 import AllCompanies from '../views/company/AllCompanies.vue';
 import OneCompany from '../views/company/OneCompany.vue';
+import CompanyPosts from '../views/company/CompanyPosts.vue'
 
 import AllPosts from '../views/post/AllPosts.vue'
 import ShowPost from '../views/post/ShowPost.vue'
@@ -131,6 +132,11 @@ const routes = [
     path : '/companies/:id',
     name : 'Company',
     component : OneCompany
+  },
+  {
+    path : '/companies/:id/posts',
+    name : 'Company posts',
+    component : CompanyPosts
   },
   {
     path : '/forbidden',

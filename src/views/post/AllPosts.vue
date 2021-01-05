@@ -4,9 +4,9 @@
       
       <template v-if="posts.length > 0" >
           <v-row>
-            <v-col cols="12" md="4">
+            <!-- <v-col cols="12" md="4">
               filter by ?
-            </v-col>
+            </v-col> -->
             <v-col cols="12" md="8">
               <app-single-post v-for="post in posts" :key="post.id" :post="post" ></app-single-post>
             </v-col>

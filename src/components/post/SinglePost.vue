@@ -85,7 +85,7 @@ export default {
   cursor: pointer;
   position:relative;
   padding: 10px;
-  margin : 15px 0;
+  margin : 30px 0;
 }
 #card:hover
 {
@@ -105,7 +105,7 @@ export default {
   z-index: 10;
   position: absolute;
   left: 0;
-  top: -12%;
+  top: -13%;
 
 }
 </style>

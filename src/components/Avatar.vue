@@ -35,15 +35,26 @@
               </p>
               
               <template v-if="getRoles.includes('ROLE_ADMIN')" >
-                  <v-divider class="my-3"></v-divider>
-              <v-btn
-                depressed
-                rounded
-                text
-                :to="{ name : 'Admin' }"
-              >
-                Dashboard
-              </v-btn>
+                <v-divider class="my-3"></v-divider>
+                <v-btn
+                  depressed
+                  rounded
+                  text
+                  :to="{ name : 'Admin' }"
+                >
+                  Dashboard
+                </v-btn>
+              </template>
+              <template v-if="getRoles.includes('ROLE_ENTREPRISE')" >
+                <v-divider class="my-3"></v-divider>
+                <v-btn
+                  depressed
+                  rounded
+                  text
+                  :to="{ name : 'Company posts' , params : { id : $store.getters.getCompanyId} }"
+                >
+                  My posts
+                </v-btn>
               </template>
               <v-divider class="my-3"></v-divider>
               <v-btn

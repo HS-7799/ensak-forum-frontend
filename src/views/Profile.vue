@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="text-center spinner" v-if="!profileIsHere" >
+      <v-progress-circular color="primary" class="loader" :size="70" indeterminate ></v-progress-circular>
+    </div>
     <v-card class="mx-auto mt-2" max-width="1150" tile>
       <v-img height="200" src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"></v-img>
       <v-row style="margin:2.5%;position:absolute; top: 130px">
@@ -55,6 +58,7 @@ export default {
   data()
   {
     return {
+      profileIsHere : false,
       id : null,
       name : null,
       email : null,
@@ -98,6 +102,7 @@ export default {
         this.$store.dispatch("setCompanyId",res.data.company)
         this.$router.push({name : 'Company' , params : { id : res.data.company }})
       }
+      this.profileIsHere = true
     }).catch((err) => {
       if(err.response.status === 500)
       {
@@ -110,3 +115,22 @@ export default {
   
 };
 </script>
+
+
+<style scoped>
+.spinner
+{
+ position: absolute;
+ top : 0;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ z-index: 10;
+ background-color: white;
+}
+.spinner .loader
+{
+  margin: auto;
+  top: 30%;
+}
+</style>

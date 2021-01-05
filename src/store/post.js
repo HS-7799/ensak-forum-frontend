@@ -50,6 +50,13 @@ const actions = {
       .then(() => {
         commit("removePost",post)
       })
+      .catch(err => {
+          if(err.response.status === 500)
+          {
+            this.$router.push('/forbidden')
+
+          }
+      })
     },
 
     addPost({commit},post)

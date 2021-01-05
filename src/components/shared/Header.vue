@@ -1,6 +1,7 @@
 <template>
   <div>
       <v-navigation-drawer
+      style="z-index:15"
         v-model="drawer"
         absolute
         temporary
@@ -34,6 +35,12 @@
                 <v-list-item-title>
                   <v-icon>mdi-view-dashboard</v-icon>
                   Dashboard
+                </v-list-item-title>
+              
+              </v-list-item>
+              <v-list-item :to="{name : 'Company posts', params : {id : getCompanyId }}" v-if="getRoles.includes('ROLE_ENTREPRISE')" >
+                <v-list-item-title>
+                  My posts
                 </v-list-item-title>
               
               </v-list-item>
@@ -135,7 +142,8 @@ export default {
     ...mapGetters([
       'getLoggedIn',
       'getRoles',
-      'getId'
+      'getId',
+      'getCompanyId'
     ])
   },
   components : {
