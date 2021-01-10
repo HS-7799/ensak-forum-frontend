@@ -87,7 +87,7 @@ export default {
 
     axios.get(`http://localhost:8080/api/posts/${this.$route.params.id}`)
     .then((res) => {
-      if(res.data.company.id !== this.getCompanyId && !this.getRoles.includes('ROLE_ADMIN') )
+      if(!this.getRoles.includes('ROLE_ADMIN') )
       {
           this.$router.push('/forbidden')
       }
@@ -112,9 +112,9 @@ export default {
       }
       axios.put(`http://localhost:8080/api/posts/${this.$route.params.id}`,form,{headers : authHeader()})
             .then((res) => {
-                      this.$router.push({name : 'Post',params : { id : res.data.id }})
+                      this.$router.push({name : 'Admin / Post',params : { id : res.data.id }})
             }).catch((err) => {
-                if(err.response.status === 500 || err.response.status === 400)
+                if(err.response.status === 500)
                 {
                     this.$router.push('/forbidden')
                 }

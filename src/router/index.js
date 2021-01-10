@@ -33,6 +33,9 @@ import Company from '../views/admin/company/Company.vue'
 import AddCompany from '../views/admin/company/AddCompany.vue'
 import EditCompany from '../views/admin/company/EditCompany.vue'
 
+import AdminPost from '../views/admin/post/Post.vue'
+import AdminEditPost from '../views/admin/post/EditPost.vue'
+
 
 import NotFound from '../components/NotFound.vue'
 import Forbidden from '../components/Forbidden.vue'
@@ -70,6 +73,13 @@ const routes = [
       {
         path : 'companies/:id/edit', name : 'Admin / Company / Edit', component : EditCompany
       },
+      {
+        path : 'posts', name : 'Admin / Post', component : AdminPost
+      },
+      {
+        path : 'posts/:id/edit', name : 'Admin / Post / Edit', component : AdminEditPost
+      },
+      
     ]
   },
   {

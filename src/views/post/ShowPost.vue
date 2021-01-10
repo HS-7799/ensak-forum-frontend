@@ -20,6 +20,7 @@
             Published At {{ formatDate(post.createdAt) }}
       </span>
     </v-card-text>
+    
     <v-card-actions v-if="!isLoading" >
           <template v-if="isEdited" >
             <v-btn icon @click="editPost" >

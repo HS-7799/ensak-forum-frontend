@@ -34,7 +34,7 @@ const getters = {
     },
     getLoggedIn(state)
     {
-        return state.isLoggedIn;
+        return state.username ?  state.isLoggedIn && User.loggedIn(state.username) : state.isLoggedIn
     },
     getInitials(state)
     {

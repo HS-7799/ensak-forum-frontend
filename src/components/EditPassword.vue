@@ -115,6 +115,7 @@ import AuthHeader from '../services/auth-header.js';
           this.message = res.data.message
           this.errors = []
           this.isLoading = false
+          this.clear()
         }).catch((err) => {
           if(err.response.data.details)
           {

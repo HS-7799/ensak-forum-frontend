@@ -106,7 +106,8 @@ export default {
           { to : '/admin/specialities', name : 'Specialities' },
           { to : '/admin/activities', name : 'Activities' },
           { to : '/admin/students', name : 'Students' },
-          { to : '/admin/Companies', name : 'Companies' },
+          { to : '/admin/companies', name : 'Companies' },
+          { to : '/admin/posts', name : 'Posts' },
       ]
     }),
     computed : {
