@@ -183,10 +183,9 @@
                             ></v-textarea>
 
                         <v-file-input
-                            v-model="files"
+                            v-model="file"
                             placeholder="Upload your resume"
                             label="Resume"
-                            multiple
                             prepend-icon="mdi-paperclip"
                         >
                             <template v-slot:selection="{ text }">
@@ -226,6 +225,7 @@
 </template>
 
 <script>
+
 import { mapGetters } from 'vuex'
 import axios from 'axios'
   export default {
@@ -266,9 +266,10 @@ import axios from 'axios'
       showPasswordConfirmation : false,
       level : null,
       speciality : null,
-      files : [],
-      description : null
-    }),
+      file : [],
+      description : null,
+      file_download_uri : null
+    }), 
     mounted()
     {
       if(this.$store.getters.getLoggedIn)
@@ -313,10 +314,11 @@ import axios from 'axios'
       register()
       {
           this.isLoading = true
+           
           if(this.isValid && this.isValid2)
           {
-              const API_URL = "http://localhost:8080/api/auth/"
-
+            
+            const API_URL = "http://localhost:8080/api/auth/"
             const form = {
                 "name" : this.name,
                 "password" : this.password,
@@ -327,45 +329,54 @@ import axios from 'axios'
 
             axios.post(API_URL + 'signup',form)
             .then((res) => {
-                this.errors1 = []
-                this.isLoading = false
-                const form = {
-                    "user" : { id : res.data },
-                    "level" : { id : this.level },
-                    "speciality" : { id : this.speciality },
-                    "description" : this.description,
-                    "cv" : ""
-                }
-
-                axios.post("http://localhost:8080/api/students",form)
-                .then(() => {
-                  this.clear()
-                  this.successMessage = true
-                  this.e1 = 1
+                  this.errors1 = []
                   this.isLoading = false
-                  this.errors2 = []
-                }).catch((err) => {
-                  console.log(err.response);
-                  if(!this.isValid2)
-                  {
-                    this.errors2 = ["all fields are required"]
-                  }
-                  this.isLoading = false;
-                });
+                  let file = this.file;
+                  let form = new FormData(); 
+                  form.append('file', file);
+                  axios.post('http://localhost:8080/uploadFile',form)
+                  .then((res1)=> {
+                      this.isLoading = false
+                      this.errors2 = []
+                      this.file_download_uri=res1.data
+                      const form = {
+                        "user" : { id : res.data },
+                        "level" : { id : this.level },
+                        "speciality" : { id : this.speciality },
+                        "description" : this.description,
+                        "fileDownloadUri" : this.file_download_uri,
+                      }
+                      axios.post("http://localhost:8080/api/students",form)
+                      .then(() => {
+                        this.clear()
+                        this.successMessage = true
+                          
+                      }).catch(() => {
+                        if(!this.isValid2)
+                        {
+                          this.errors2 = ["all fields are required"]
+                        }
+                        this.isLoading = false;
+                        });
 
+                  }).catch((err) => {
+                  this.isLoading = false
+                  this.errors1 = err.response.data.message.split(',')
+                  this.errors1.pop();
+              });
             }).catch((err) => {
-                this.isLoading = false
-                this.errors1 = err.response.data.message.split(',')
-                this.errors1.pop();
-            });
-          }
-      },
+                  this.isLoading = false
+                  this.errors1 = err.response.data.message.split(',')
+                  this.errors1.pop();
+              });
+            }
+        },
       clear() {
         
         this.$refs.form.reset()
         this.level = null
         this.description = null
-        this.cv = null
+        this.file = null
         this.speciality = null
       },
     },

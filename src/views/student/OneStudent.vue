@@ -24,13 +24,28 @@
   </v-card>
   <v-container style="margin-top:60px" >
     <v-row class="mx-auto " max-width="1000"  >
-        <v-col cols="12" >
+        <v-col cols="12" v-if="cv != null" >
           <v-card tile >
             <v-card-title>
-              Description
+              My resume
             </v-card-title>
             <v-card-text>
-              {{description}}
+              <v-btn
+                v-if="cv != ''"
+                :href="cv"
+                color="blue-grey"
+                class="ma-2 white--text"
+                
+                
+              >
+              Download
+                <v-icon dark class="ml-1">
+                  mdi-cloud-download
+                </v-icon>
+              </v-btn>
+              <span v-else>
+                Not uploaded yet
+              </span>
             </v-card-text>
           </v-card>
         </v-col>
@@ -64,7 +79,15 @@
           </v-card>
         </v-col>
         <v-col col="12">
-          <app-carousel-posts></app-carousel-posts>
+          <!-- <app-carousel-posts></app-carousel-posts> -->
+          <v-card tile >
+            <v-card-title>
+              Description
+            </v-card-title>
+            <v-card-text>
+              {{description}}
+            </v-card-text>
+          </v-card>
         </v-col>
       </v-row>
   </v-container>
@@ -72,7 +95,7 @@
 </template>
 <script>
 import axios from 'axios'
-import CarouselPosts from '../../components/CarouselPosts.vue'
+// import CarouselPosts from '../../components/CarouselPosts.vue'
 export default {
   name: 'Student',
   data()
@@ -103,6 +126,8 @@ export default {
       this.level = res.data.level.label
       this.speciality = res.data.speciality.label
       this.description = res.data.description
+      console.log(res.data);
+      this.cv = res.data.fileDownloadUri
     }).catch((err) => {
       if(err.response.status === 404)
       {
@@ -110,9 +135,9 @@ export default {
       }
     });
   },
-  components : {
-    appCarouselPosts : CarouselPosts
-  }
+  // components : {
+  //   appCarouselPosts : CarouselPosts
+  // }
   
 }
 </script>

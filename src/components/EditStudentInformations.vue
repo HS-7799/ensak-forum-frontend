@@ -134,7 +134,7 @@ export default {
               id : this.speciality
             },
             description : this.description,
-            cv : ""
+            fileDownloadUri : ""
           }
           
           this.isLoading = true

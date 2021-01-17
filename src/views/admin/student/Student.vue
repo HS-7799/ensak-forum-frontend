@@ -28,6 +28,22 @@
       :loading="isGettingStudents"
       loading-text="Loading... Please wait"
     >
+    <template v-slot:[`item.cv`]="{ item }">
+            <v-btn
+      :href="item.cv"
+      color="blue-grey"
+      class="ma-2 white--text"
+      
+      
+    >
+      <v-icon dark>
+        mdi-cloud-download
+      </v-icon>
+    </v-btn>
+          </template>
+
+
+
       <template v-slot:top v-if="dialogDelete" >
         <v-toolbar flat >
           <v-dialog v-model="dialogDelete" max-width="500px">
@@ -97,7 +113,7 @@ export default {
                             level : student.level.label,
                             speciality : student.speciality.label,
                             description : student.description,
-                            cv : student.cv,
+                            cv : student.fileDownloadUri,
                     }
             })
       }

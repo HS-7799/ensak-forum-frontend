@@ -96,6 +96,18 @@
         :items="filteredStudents"
         :search="search2"
         >
+        <template v-slot:[`item.cv`]="{ item }">
+            <v-btn
+            :href="item.fileDownloadUri"
+            color="blue-grey"
+            class="ma-2 white--text"
+            
+            >
+            <v-icon dark>
+                mdi-cloud-download
+            </v-icon>
+            </v-btn>
+          </template>
         <template v-slot:[`item.actions`]="{ item }">
                 <v-btn  small text color="primary" @click="$router.push({name : 'Student',params : {id : item.id}})" >Explore</v-btn> 
         </template>

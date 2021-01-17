@@ -76,6 +76,7 @@
             color="blue darken-1"
             text
             @click="addNewPost"
+            :loading="isLoading"
           >
             Save
           </v-btn>
@@ -91,6 +92,7 @@ import authHeader from '../../services/auth-header';
 import { mapGetters } from 'vuex';
   export default {
     data: () => ({
+      isLoading : false,
       dialog: false,
       errors : [],
       fieldRules: [
@@ -118,11 +120,14 @@ import { mapGetters } from 'vuex';
                 }
 
             }
+            this.isLoading = true;
             axios.post('http://localhost:8080/api/posts',form,{headers : authHeader()})
             .then((res) => {
+                this.isLoading = false
                 this.clear()
                 this.$store.dispatch("addPost",res.data)
             }).catch((err) => {
+                this.isLoading = false
                 if(err.response.status === 500)
                 {
                     this.$router.push('/forbidden')
