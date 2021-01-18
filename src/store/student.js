@@ -46,7 +46,7 @@ const mutations = {
         state.isGettingStudents = value
     },
 
-    setId(state,id)
+    setStudentId(state,id)
     {
         state.id = id;
     }
@@ -70,7 +70,7 @@ const actions = {
 
     setStudentId({commit},id)
     {
-        commit("setId",id)
+        commit("setStudentId",id)
     },
 
     deleteStudent({commit},item)

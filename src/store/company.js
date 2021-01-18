@@ -36,7 +36,7 @@ const mutations = {
         state.companies = companies;
     },
 
-    setId(state,id)
+    setCompanyId(state,id)
     {
         state.id = id
     },
@@ -70,7 +70,7 @@ const actions = {
 
     setCompanyId({commit},id)
     {
-        commit("setId",id)
+        commit("setCompanyId",id)
     },
 
     deleteCompany({commit},item)

@@ -64,7 +64,6 @@ export default {
         company : {
           id : null,
           user : {
-
           }
         }
       }
@@ -140,6 +139,9 @@ export default {
         this.isAlreadyApplied = true
         this.isApplying = false
       })
+      .catch(err => {
+        console.log(err);
+      }) 
     },
     formatDate (input) {
       var datePart = input.match(/\d+/g),

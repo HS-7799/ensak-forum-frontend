@@ -79,7 +79,6 @@
           </v-card>
         </v-col>
         <v-col col="12">
-          <!-- <app-carousel-posts></app-carousel-posts> -->
           <v-card tile >
             <v-card-title>
               Description
@@ -95,7 +94,6 @@
 </template>
 <script>
 import axios from 'axios'
-// import CarouselPosts from '../../components/CarouselPosts.vue'
 export default {
   name: 'Student',
   data()
@@ -126,7 +124,6 @@ export default {
       this.level = res.data.level.label
       this.speciality = res.data.speciality.label
       this.description = res.data.description
-      console.log(res.data);
       this.cv = res.data.fileDownloadUri
     }).catch((err) => {
       if(err.response.status === 404)
@@ -135,9 +132,7 @@ export default {
       }
     });
   },
-  // components : {
-  //   appCarouselPosts : CarouselPosts
-  // }
+  
   
 }
 </script>
