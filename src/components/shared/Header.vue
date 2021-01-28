@@ -159,3 +159,18 @@ export default {
   
 }
 </script>
+
+<style>
+
+.v-btn--active
+{
+    border-bottom : 3px solid orange;
+    
+}
+
+.v-btn--active::before {
+    opacity: 0 !important;
+}
+
+
+</style>

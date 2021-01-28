@@ -11,7 +11,7 @@
       </template>
       <template v-else >
         <router-view></router-view>
-      <vue-progress-bar></vue-progress-bar>
+        <vue-progress-bar></vue-progress-bar>
       </template>
   </v-app>
 </template>

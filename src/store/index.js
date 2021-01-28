@@ -43,7 +43,7 @@ export default new Vuex.Store({
       commit('setShowSnack',value)
       setTimeout(function(){
         commit('setShowSnack',!value)
-      },2001)
+      },2500)
     },
     setSnackMessage({commit},value)
     {

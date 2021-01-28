@@ -14,12 +14,6 @@
                     hide-details
                 ></v-text-field>
                 </v-col>
-                <!-- <v-col cols="12" lg="2" md="4" sm="6" >
-                <v-btn  color="#4BBAFC" dark :to="{ name : 'Admin / Student / Create' }">
-                    New Student
-                    <v-icon>mdi-account-multiple-plus</v-icon>
-                </v-btn>
-                </v-col> -->
             </v-row>
         </v-container>
         </v-card-title>
@@ -44,7 +38,7 @@
             </v-toolbar>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-                <v-btn  small text color="primary" @click="visitPost(item.id)" >Explore</v-btn>
+                <v-icon small color="blue" class="mr-2" @click="visitPost(item.id)">mdi-arrow-right-thick</v-icon>
                 <v-icon small color="green" class="mr-2" @click="editPost(item.id)">mdi-pencil</v-icon>
                 <v-icon small color="red" @click="deletePost(item)">mdi-delete</v-icon>
                 <v-btn  small text color="primary" @click="selectStudents(item)" v-if="item.students.length > 0" >who applied?</v-btn> 
@@ -101,6 +95,7 @@
             :href="item.fileDownloadUri"
             color="blue-grey"
             class="ma-2 white--text"
+            small
             
             >
             <v-icon dark>
@@ -109,7 +104,8 @@
             </v-btn>
           </template>
         <template v-slot:[`item.actions`]="{ item }">
-                <v-btn  small text color="primary" @click="$router.push({name : 'Student',params : {id : item.id}})" >Explore</v-btn> 
+                <v-icon small color="blue" class="mr-2" title="Explore"  @click="$router.push({name : 'Student',params : {id : item.id}})">mdi-arrow-right-thick</v-icon>
+
         </template>
         </v-data-table>
     </v-card>

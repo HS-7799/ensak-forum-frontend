@@ -9,6 +9,9 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+      <v-btn text to="/admin" style="border:none" >
+          Dashboard
+      </v-btn>
       <v-btn text @click="logout" >
         <v-icon>mdi-logout</v-icon>
           Logout
@@ -40,16 +43,91 @@
 
     <v-container>
       <v-row dense v-if="$route.name === 'Admin'" >
-        <v-col cols="6" v-for="item in items" :key="item.name" >
+        <v-col cols="6" >
           <v-card
-            :color="item.color"
+            color="teal lighten-3"
+            dark
           >
             <v-card-title class="headline">
-              {{ item.number }}
+              {{ getLevels.length }}
             </v-card-title>
 
             <v-card-subtitle>
-              {{ item.name }}
+              Levels
+            </v-card-subtitle>
+
+          </v-card>
+        </v-col>
+        <v-col cols="6" >
+          <v-card
+            color="red lighten-3"
+            dark
+          >
+            <v-card-title class="headline">
+              {{ getSpecialities.length }}
+            </v-card-title>
+
+            <v-card-subtitle>
+              Specialities
+            </v-card-subtitle>
+
+          </v-card>
+        </v-col>
+        <v-col cols="6" >
+          <v-card
+            color="pink lighten-2"
+            dark
+          >
+            <v-card-title class="headline">
+              {{ getActivityareas.length }}
+            </v-card-title>
+
+            <v-card-subtitle>
+              Activities
+            </v-card-subtitle>
+
+          </v-card>
+        </v-col>
+        <v-col cols="6" >
+          <v-card
+            color="brown lighten-1"
+            dark
+          >
+            <v-card-title class="headline">
+              {{ getPosts.length }}
+            </v-card-title>
+
+            <v-card-subtitle>
+              Posts
+            </v-card-subtitle>
+
+          </v-card>
+        </v-col>
+        <v-col cols="6" >
+          <v-card
+            color="purple lighten-2"
+            dark
+          >
+            <v-card-title class="headline">
+              {{ getStudents.length }}
+            </v-card-title>
+
+            <v-card-subtitle>
+              Students
+            </v-card-subtitle>
+
+          </v-card>
+        </v-col>
+        <v-col cols="6" >
+          <v-card
+            color="orange lighten-4" dark
+          >
+            <v-card-title class="headline">
+              {{ getCompanies.length }}
+            </v-card-title>
+
+            <v-card-subtitle>
+              Companies
             </v-card-subtitle>
 
           </v-card>
@@ -72,33 +150,6 @@ import AuthHeader from '../../services/auth-header'
 export default {
 
     data: () => ({
-      items : [
-        {
-          number : 12,
-          name : 'Levels',
-          color : 'teal lighten-3'
-        },
-        {
-          number : 10,
-          name : 'Specialities',
-          color : 'blue lighten-3'
-        },
-        {
-          number : 40,
-          name : 'Students',
-          color : 'orange lighten-4'
-        },
-        {
-          number : 15,
-          name : 'Companies',
-          color : 'brown lighten-1'
-        },
-         {
-          number : 5,
-          name : 'Activities',
-          color : 'yellow lighten-1'
-        }
-      ],
       drawer: false,
       group: null,
       routes : [
@@ -113,7 +164,14 @@ export default {
     computed : {
       ...mapGetters([
         'getLoggedIn',
-        'getRoles'
+        'getRoles',
+        'getLevels',
+        'getActivityareas',
+        'getCompanies',
+        'getPosts',
+        'getSpecialities',
+        'getStudents'
+
       ])
     },
     watch: {
@@ -130,6 +188,8 @@ export default {
     },
     created()
     {
+      
+
       if(!this.getLoggedIn)
       {
         this.$router.push({name : 'Login'})
@@ -142,6 +202,15 @@ export default {
         axios.get('/api/test/admin',{ headers :  AuthHeader()})
         .then(() => {
           this.$store.commit('setRoles','ROLE_ADMIN')
+          if(this.$route.name == 'Admin')
+          {
+            this.$store.dispatch('getLevels')
+            this.$store.dispatch('getActivityareas')
+            this.$store.dispatch('getCompanies')
+            this.$store.dispatch('getPosts')
+            this.$store.dispatch('getSpecialities')
+            this.$store.dispatch('getStudents')
+          }
         }).catch(() => {
           this.$router.push('/forbidden')
         });
@@ -153,4 +222,7 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped >
+
+
+</style>

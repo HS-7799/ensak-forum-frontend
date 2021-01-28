@@ -37,6 +37,7 @@
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
+            <v-icon small color="blue" class="mr-2" @click="explorePost(item.id)">mdi-arrow-right-thick</v-icon>
             <v-icon small color="green" class="mr-2" @click="editPost(item.id)">mdi-pencil</v-icon>
             <v-icon small color="red" @click="deletePost(item)">mdi-delete</v-icon>
           </template>
@@ -73,19 +74,24 @@ export default {
       posts()
       {
         return this.getPosts.map(post => {
-                    return {
-                            id : post.id,
-                            body : post.body,
-                            created_at:post.createdAt,
-                            update_at:post.updatedAt,
-                            title:post.title,
-                            location:post.location,
-                            company:post.company.user.name,
-                    }
+              return {
+                id : post.id,
+                body : post.body,
+                created_at:post.createdAt,
+                update_at:post.updatedAt,
+                title:post.title,
+                location:post.location,
+                company:post.company.user.name,
+              }
             })
       }
     },
     methods : {
+      explorePost(id)
+      {
+
+        this.$router.push({ name : 'Post' , params : {id : id } })
+      },
       editPost(id)
       {
         this.$router.push({ name : 'Admin / Post / Edit' , params : {id : id } })

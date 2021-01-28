@@ -37,9 +37,10 @@
                 ></v-textarea>
                 <v-btn
                 tile
-                :disabled="!valid"
+                
                 :loading="isLoading"
                 color="primary"
+                :disabled="!valid"
                 class="mr-4"
                 @click="submit"
                 >
@@ -110,13 +111,15 @@ export default {
         title : this.title,
         body : this.body,
       }
+      this.isLoading = true
       axios.put(`/api/posts/${this.$route.params.id}`,form,{headers : authHeader()})
             .then((res) => {
                 this.$router.push({name : 'Post',params : { id : res.data.id }})
                 this.$store.dispatch('setShowSnack',true)
                 this.$store.dispatch('setSnackMessage','Post updated successfully')
             }).catch((err) => {
-                if(err.response.status === 500 || err.response.status === 400)
+              this.isLoading = false
+                if(err.response.status === 500)
                 {
                     this.$router.push('/forbidden')
                 }

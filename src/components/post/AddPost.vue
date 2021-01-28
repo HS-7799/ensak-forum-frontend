@@ -30,7 +30,7 @@
         </v-card-title>
         <v-card-text>
           <v-container>
-            <v-form ref="form" @submit.prevent="addNewPost" >
+            <v-form ref="form" @submit.prevent="addNewPost" v-model="valid" >
               <v-row>
                <v-col cols="12">
                 <v-text-field
@@ -77,6 +77,8 @@
             text
             @click="addNewPost"
             :loading="isLoading"
+            :disabled="!valid"
+            
           >
             Save
           </v-btn>
@@ -92,6 +94,7 @@ import authHeader from '../../services/auth-header';
 import { mapGetters } from 'vuex';
   export default {
     data: () => ({
+      valid: true,
       isLoading : false,
       dialog: false,
       errors : [],
@@ -118,7 +121,6 @@ import { mapGetters } from 'vuex';
                 company : {
                     id : this.companyId
                 }
-
             }
             this.isLoading = true;
             axios.post('/api/posts',form,{headers : authHeader()})

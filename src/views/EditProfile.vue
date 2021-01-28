@@ -5,6 +5,7 @@
             <app-edit-user-informations v-if="userInfo.name !== '' " :userInfo="userInfo" ></app-edit-user-informations>
             <app-edit-password :userId="userId" ></app-edit-password>
         </v-col>
+        
         <v-col cols="12" md="6" v-if="roles.includes('ROLE_ETUDIANT')" >
           <app-edit-student-informations :id="id" :userId="userId" ></app-edit-student-informations>
         </v-col>

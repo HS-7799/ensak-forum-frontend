@@ -13,7 +13,7 @@
               ></v-text-field>
             </v-col>
             <v-col cols="12" lg="2" md="4" sm="6" >
-              <v-btn  color="#4BBAFC" dark :to="{ name : 'Admin / Company / Create' }">
+              <v-btn  color="#4BBAFC" dark :to="{ name : 'Admin / Company / Create' }" absolute top right>
           New Company
           <v-icon>mdi-account-multiple-plus</v-icon>
       </v-btn>
@@ -44,6 +44,7 @@
         </v-toolbar>
       </template>
         <template v-slot:[`item.actions`]="{ item }">
+            <v-icon small color="blue" class="mr-2" @click="exploreCompany(item.id)">mdi-arrow-right-thick</v-icon>
             <v-icon small color="green" class="mr-2" @click="editCompany(item.id)">mdi-pencil</v-icon>
             <v-icon small color="red" @click="deleteCompany(item)">mdi-delete</v-icon>
         </template>
@@ -61,12 +62,11 @@ import { mapGetters } from 'vuex'
         dialogDelete : false,
         editedItem : null,
         headers: [
+          { text: 'logo', value: 'logo',sortable : false },
           { text: 'Name',align: 'start',filterable: true, value: 'name',},
           { text: 'Username', value: 'username',sortable : false },
           { text: 'Email', value: 'email',sortable : true },
           { text: 'Activityarea', value: 'activityarea',sortable : false },
-          { text: 'Descritpion', value: 'description',sortable : false },
-          { text: 'logo', value: 'logo',sortable : false },
           { text : 'Actions', value : 'actions',sortable : false}
         ],
         
@@ -86,18 +86,21 @@ import { mapGetters } from 'vuex'
         return this.getCompanies.map(company=> {
           return{
               id : company.id,
+              logo : company.logo,
               name : company.user.name,
               username : company.user.username,
               email : company.user.email,
               activityarea : company.activityarea.label,
-              description : company.description,
-              logo : company.logo,
           }
         })
         
       }
     },
     methods : {
+      exploreCompany(id)
+      {
+        this.$router.push({ name : 'Company' , params : {id : id } })
+      },
       editCompany(id)
       {
         this.$router.push({ name : 'Admin / Company / Edit' , params : {id : id } })

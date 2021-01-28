@@ -13,7 +13,7 @@
               ></v-text-field>
             </v-col>
             <v-col cols="12" lg="2" md="4" sm="6" >
-              <v-btn  color="#4BBAFC" dark :to="{ name : 'Admin / Student / Create' }">
+              <v-btn  color="#4BBAFC" dark :to="{ name : 'Admin / Student / Create' }" absolute top right >
                 New Student
                 <v-icon>mdi-account-multiple-plus</v-icon>
             </v-btn>
@@ -28,25 +28,26 @@
       :loading="isGettingStudents"
       loading-text="Loading... Please wait"
     >
-    <template v-slot:[`item.cv`]="{ item }">
+          <template v-slot:[`item.cv`]="{ item }">
             <v-btn
-      :href="item.cv"
-      color="blue-grey"
-      class="ma-2 white--text"
-      
-      
-    >
-      <v-icon dark>
-        mdi-cloud-download
-      </v-icon>
-    </v-btn>
+              :href="item.cv"
+              color="blue-grey"
+              small
+              class="ma-2 white--text"
+              
+              
+            >
+              <v-icon dark>
+                mdi-cloud-download
+              </v-icon>
+            </v-btn>
           </template>
 
 
 
       <template v-slot:top v-if="dialogDelete" >
         <v-toolbar flat >
-          <v-dialog v-model="dialogDelete" max-width="500px">
+          <v-dialog v-model="dialogDelete" max-width="40%">
           <v-card>
             <v-card-title class="headline">Are you sure you want to delete this student?</v-card-title>
             <v-card-actions>
@@ -60,6 +61,7 @@
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
+            <v-icon small color="blue" class="mr-2" @click="exploreStudent(item.id)">mdi-arrow-right-thick</v-icon>
             <v-icon small color="green" class="mr-2" @click="editStudent(item.id)">mdi-pencil</v-icon>
             <v-icon small color="red" @click="deleteStudent(item)">mdi-delete</v-icon>
           </template>
@@ -87,7 +89,6 @@ export default {
           { text: 'Email', value: 'email',sortable : true },
           { text: 'Level', value: 'level',sortable : false },
           { text: 'Speciality', value: 'speciality',sortable : false },
-          { text: 'Descritpion', value: 'description',sortable : false },
           { text: 'Cv', value: 'cv',sortable : false },
           { text : 'Actions', value : 'actions',sortable : false}
         ],
@@ -119,6 +120,10 @@ export default {
       }
     },
     methods : {
+      exploreStudent(id)
+      {
+        this.$router.push({ name : 'Student' , params : {id : id } })
+      },
       editStudent(id)
       {
         this.$router.push({ name : 'Admin / Student / Edit' , params : {id : id } })

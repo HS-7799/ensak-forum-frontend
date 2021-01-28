@@ -29,10 +29,14 @@
         <v-card>
           <v-list-item-content class="justify-center">
             <div class="mx-auto text-center">
-              <h3>{{ fullName }}</h3>
-              <p class="caption mt-1">
-                {{ email }}
-              </p>
+              <div style="padding: 0 5px" >
+                <h3>{{ fullName }}</h3>
+                <p class="caption mt-1">
+                  <span style="display:block" >{{ roleName }}</span>
+                  <span>{{ email }}</span>
+                </p>
+                
+              </div>
               
               <template v-if="getRoles.includes('ROLE_ADMIN')" >
                 <v-divider class="my-3"></v-divider>
@@ -104,7 +108,17 @@ export default {
             fullName : 'getName',
             email : 'getEmail',
             id : 'getId',
-        })
+        }),
+        roleName()
+        {
+         if(this.getRoles.includes("ROLE_ADMIN"))
+            return "Admin"
+          else if(this.getRoles.includes("ROLE_ENTREPRISE"))
+            return 'Company'
+          else if(this.getRoles.includes("ROLE_ETUDIANT"))
+            return 'Student'
+          else return ''
+        }
     },
     methods : {
         logout()
@@ -115,3 +129,19 @@ export default {
     },
   }
 </script>
+
+
+<style>
+
+
+.v-item--active
+{
+    background-color: orange;
+}
+
+.v-item--active::before{
+    opacity: 0 !important;
+}
+
+
+</style>
