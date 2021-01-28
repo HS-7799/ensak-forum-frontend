@@ -1,5 +1,6 @@
 <template>
   <v-app>
+      <app-snackbar v-if="showSnackbar" ></app-snackbar>
       <template v-if="!pageForAdmin" >
         <app-header></app-header>
         <v-main class="main" >
@@ -19,8 +20,10 @@
 import Header from './components/shared/Header'
 import Footer from './components/shared/Footer'
 import User from './Helpers/User'
+import Snackbar from './components/shared/Snackbar.vue'
 export default {
   name: 'App',
+  
   mounted () {
     this.$Progress.finish()
   },
@@ -50,8 +53,14 @@ export default {
   components : {
     appHeader : Header,
     appFooter : Footer,
+    appSnackbar : Snackbar
   },
   computed:{
+
+    showSnackbar()
+    {
+      return this.$store.getters.getShowSnackbar
+    },
     pageForAdmin()
     {
       return this.$route.name.startsWith("Admin") || this.$route.name.startsWith("Error")

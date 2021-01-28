@@ -144,6 +144,8 @@ export default {
             axios.put(`/api/students/${this.id}`,form,{headers : AuthHeader()})
             .then(() => {
               this.isLoading = false
+              this.$store.dispatch('setShowSnack',true)
+              this.$store.dispatch('setSnackMessage','Informations are updated successfully')
             })
             .catch(() => {
               this.isLoading = false
@@ -151,6 +153,8 @@ export default {
           } else {
             axios.post(`/api/students`,form)
             .then(() => {
+              this.$store.dispatch('setShowSnack',true)
+              this.$store.dispatch('setSnackMessage','Informations are updated successfully')
               this.isLoading = false
               this.errors = []
             })

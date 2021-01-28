@@ -126,6 +126,8 @@ import { mapGetters } from 'vuex';
                 this.isLoading = false
                 this.clear()
                 this.$store.dispatch("addPost",res.data)
+                this.$store.dispatch('setShowSnack',true)
+                this.$store.dispatch('setSnackMessage','Post added successfully')
             }).catch((err) => {
                 this.isLoading = false
                 if(err.response.status === 500)

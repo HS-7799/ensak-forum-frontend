@@ -112,7 +112,9 @@ export default {
       }
       axios.put(`/api/posts/${this.$route.params.id}`,form,{headers : authHeader()})
             .then((res) => {
-                      this.$router.push({name : 'Post',params : { id : res.data.id }})
+                this.$router.push({name : 'Post',params : { id : res.data.id }})
+                this.$store.dispatch('setShowSnack',true)
+                this.$store.dispatch('setSnackMessage','Post updated successfully')
             }).catch((err) => {
                 if(err.response.status === 500 || err.response.status === 400)
                 {

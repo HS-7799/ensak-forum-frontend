@@ -133,6 +133,8 @@ export default {
             
             axios.put(`/api/companies/${this.id}` ,form,{headers : AuthHeader()})
             .then(() => {
+              this.$store.dispatch('setShowSnack',true)
+              this.$store.dispatch('setSnackMessage','Informations are updated successfully')
               this.isLoading = false
             })
             .catch(() => {
@@ -141,6 +143,8 @@ export default {
           } else {
             axios.post(`/api/companies`,form,{headers : AuthHeader()})
             .then(() => {
+              this.$store.dispatch('setShowSnack',true)
+              this.$store.dispatch('setSnackMessage','Informations are updated successfully')
               this.isLoading = false
               this.errors = []
             })

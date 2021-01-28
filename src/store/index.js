@@ -14,13 +14,41 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    showSnack : false,
+    snackMessage : ''
   },
   getters : {
-
+    getShowSnackbar(state)
+    {
+      return state.showSnack
+    },
+    getSnackMessage(state)
+    {
+      return state.snackMessage
+    }
   },
   mutations: {
+    setShowSnack(state,value)
+    {
+      state.showSnack = value
+    },
+    setSnackMessage(state,value)
+    {
+      state.snackMessage = value
+    }
   },
   actions: {
+    setShowSnack({commit},value)
+    {
+      commit('setShowSnack',value)
+      setTimeout(function(){
+        commit('setShowSnack',!value)
+      },2001)
+    },
+    setSnackMessage({commit},value)
+    {
+      commit('setSnackMessage',value)
+    }
   },
   modules : {
     auth,

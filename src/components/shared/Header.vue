@@ -19,7 +19,7 @@
             <template v-if="!getLoggedIn">
               <v-list-item :to="{ name : 'Login' }"  >
               <v-list-item-title>
-                <v-icon>mdi-login</v-icon>
+                <!-- <v-icon>mdi-login</v-icon> -->
                 Login
               </v-list-item-title>
             </v-list-item>
@@ -46,7 +46,7 @@
               </v-list-item>
               <v-list-item :to="{ name : 'Profile'}" >
                 <v-list-item-title>
-                  <v-icon>mdi-account</v-icon>
+                  <v-icon>mdi-account-edit</v-icon>
                   Account
                 </v-list-item-title>
               
@@ -103,7 +103,7 @@
                 </v-btn>
               <template v-if="!getLoggedIn">
                 <v-btn text  :to="{ name : 'Login' }"  >
-                  <v-icon>mdi-login</v-icon>
+                  <!-- <v-icon>mdi-login</v-icon> -->
                   Login
                 </v-btn>
               <v-btn text  :to="{ name : 'Register' }">

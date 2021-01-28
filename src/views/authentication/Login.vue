@@ -119,6 +119,8 @@ import axios from 'axios'
                 this.isLoading = !this.isLoading
                 User.responseAfterLogin(res,this.username);
                 this.$store.dispatch('setUser',user)
+                this.$store.dispatch('setShowSnack',true)
+                this.$store.dispatch('setSnackMessage','You are logged in!')
                 this.$router.push({name : 'Profile'})
           }).catch((err) => {
               if(err.response.data.details === "")

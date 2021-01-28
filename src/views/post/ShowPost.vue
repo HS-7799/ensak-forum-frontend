@@ -136,6 +136,8 @@ export default {
     {
       axios.post(`/api/posts/${this.post.id}/${this.getStudentId}`,{},{headers : AuthHeader()})
       .then(() => {
+        this.$store.dispatch('setShowSnack',true)
+        this.$store.dispatch('setSnackMessage','Post applied successfully')
         this.isAlreadyApplied = true
         this.isApplying = false
       })

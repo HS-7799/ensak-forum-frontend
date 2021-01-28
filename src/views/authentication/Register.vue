@@ -1,8 +1,5 @@
 <template>
   <v-card class="mx-auto mt-5" max-width="60%" >
-    <v-alert type="success" v-if="successMessage" >
-      You are registred <router-link to="/login" >Login now</router-link>
-    </v-alert>
       <v-stepper v-model="e1">
         <v-stepper-header>
           <v-stepper-step
@@ -334,41 +331,39 @@ import axios from 'axios'
 
             axios.post('/api/auth/signup',form)
             .then((res) => {
-                  this.errors1 = []
-                  this.isLoading = false
-                  let file = this.file;
-                  let form = new FormData(); 
-                  form.append('file', file);
-                  axios.post('/uploadFile',form)
-                  .then((res1)=> {
-                      this.isLoading = false
-                      this.errors2 = []
-                      this.file_download_uri=res1.data
-                      const form = {
-                        "user" : { id : res.data },
-                        "level" : { id : this.level },
-                        "speciality" : { id : this.speciality },
-                        "description" : this.description,
-                        "fileDownloadUri" : this.file_download_uri,
+                this.errors1 = []
+                let file = this.file;
+                let form = new FormData(); 
+                form.append('file', file);
+                axios.post('/uploadFile',form)
+                .then((res1)=> {
+                    this.errors2 = []
+                    this.file_download_uri=res1.data
+                    const form = {
+                      "user" : { id : res.data },
+                      "level" : { id : this.level },
+                      "speciality" : { id : this.speciality },
+                      "description" : this.description,
+                      "fileDownloadUri" : this.file_download_uri,
+                    }
+                    axios.post("/api/students",form)
+                    .then(() => {
+                      this.clear()
+                      this.$store.dispatch('setShowSnack',true)
+                      this.$store.dispatch('setSnackMessage','You are registred successfully')
+                      this.isLoading = false;
+                    })
+                    .catch(() => {
+                      if(!this.isValid2)
+                      {
+                        this.errors2 = ["all fields are required"]
                       }
-                      axios.post("/api/students",form)
-                      .then(() => {
-                        this.clear()
-                        this.successMessage = true
-                          
-                      }).catch(() => {
-                        if(!this.isValid2)
-                        {
-                          this.errors2 = ["all fields are required"]
-                        }
-                        this.isLoading = false;
-                        });
+                      this.isLoading = false;
+                      });
 
-                  }).catch((err) => {
-                    console.log(err.response);
-                    this.isLoading = false
+                }).catch((err) => {
+                  this.isLoading = false
                   this.errors3 = err.response.data.message
-                  // this.errors3.pop();
               });
             }).catch((err) => {
                   this.isLoading = false
@@ -378,7 +373,7 @@ import axios from 'axios'
             }
         },
       clear() {
-        
+        this.e1 = 1;
         this.$refs.form.reset()
         this.level = null
         this.description = null
