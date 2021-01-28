@@ -46,16 +46,15 @@ const actions = {
     deletePost({commit},post)
     {
         return axios.delete(`/api/posts/${post.id}`,{headers : authHeader()})
-      .then(() => {
-        commit("removePost",post)
-      })
-      .catch(err => {
-          if(err.response.status === 500)
-          {
-            this.$router.push('/forbidden')
-
-          }
-      })
+        .then(() => {
+            commit("removePost",post)
+        })
+        .catch(err => {
+            if(err.response.status === 500)
+            {
+                this.$router.push('/forbidden')
+            }
+        })
     },
 
     addPost({commit},post)

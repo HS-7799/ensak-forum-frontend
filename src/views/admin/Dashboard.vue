@@ -9,7 +9,7 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-btn text to="/admin" style="border:none" >
+      <v-btn text to="/admin" style="border : none" >
           Dashboard
       </v-btn>
       <v-btn text @click="logout" >
@@ -189,7 +189,6 @@ export default {
     created()
     {
       
-
       if(!this.getLoggedIn)
       {
         this.$router.push({name : 'Login'})
@@ -202,7 +201,7 @@ export default {
         axios.get('/api/test/admin',{ headers :  AuthHeader()})
         .then(() => {
           this.$store.commit('setRoles','ROLE_ADMIN')
-          if(this.$route.name == 'Admin')
+          if(this.$route.name.startsWith('Admin'))
           {
             this.$store.dispatch('getLevels')
             this.$store.dispatch('getActivityareas')
@@ -211,6 +210,7 @@ export default {
             this.$store.dispatch('getSpecialities')
             this.$store.dispatch('getStudents')
           }
+          
         }).catch(() => {
           this.$router.push('/forbidden')
         });
