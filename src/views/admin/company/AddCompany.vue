@@ -197,7 +197,6 @@ import {mapGetters} from 'vuex';
         {
             if(this.isValid && this.isValid2)
             {
-              const API_URL = "http://localhost:8080/api/auth/"
 
             const form = {
                 "name" : this.name,
@@ -209,7 +208,7 @@ import {mapGetters} from 'vuex';
                
             }
 
-            axios.post(API_URL + 'signup',form, { headers : authHeader() })
+            axios.post('/api/auth/signup',form, { headers : authHeader() })
             .then((res) => {
                 this.errors1 = []
                 this.isLoading = false
@@ -219,7 +218,7 @@ import {mapGetters} from 'vuex';
                     "description" : this.description,
                     "address" : this.address,
                 }
-                axios.post("http://localhost:8080/api/companies",form, { headers : authHeader() })
+                axios.post("/api/companies",form, { headers : authHeader() })
                 .then(() => {
                   this.$router.push({name : 'Admin / Company'})
                 }).catch(() => {

@@ -121,7 +121,7 @@ import { mapGetters } from 'vuex';
 
             }
             this.isLoading = true;
-            axios.post('http://localhost:8080/api/posts',form,{headers : authHeader()})
+            axios.post('/api/posts',form,{headers : authHeader()})
             .then((res) => {
                 this.isLoading = false
                 this.clear()

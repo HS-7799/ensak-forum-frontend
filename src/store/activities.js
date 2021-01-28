@@ -2,7 +2,6 @@ import axios from 'axios'
 import AuthHeader from '../services/auth-header'
 
 
-const API_URL = 'http://localhost:8080/api'
 
 const state = {
     activityareas : [],
@@ -31,7 +30,7 @@ const actions = {
     getActivityareas({commit})
     {
        
-      axios.get(API_URL + '/activityareas',{ headers : AuthHeader() })
+      axios.get('/api/activityareas',{ headers : AuthHeader() })
       .then((res) => {
         commit("setActivityareas",res.data)
       }).catch((err) => {

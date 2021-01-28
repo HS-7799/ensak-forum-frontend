@@ -99,14 +99,13 @@ import axios from 'axios'
           this.isLoading = true
           this.errors = []
           this.$Progress.start();
-          const API_URL = "http://localhost:8080/api/auth/"
         
           const form = {
             username : this.username,
             password : this.password
           }
 
-          axios.post(API_URL + 'signin',form)
+          axios.post("/api/auth/signin",form)
           .then((res) => {
                 this.$Progress.finish();
                 this.errors = null

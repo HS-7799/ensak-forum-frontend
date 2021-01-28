@@ -35,10 +35,7 @@ export default {
     },
     created()
     {
-        
-        const API_URL = "http://localhost:8080/api/"
-
-        axios.get(API_URL + `students/${this.$route.params.id}`,{headers : AuthHeader()})
+        axios.get(`/api/students/${this.$route.params.id}`,{headers : AuthHeader()})
         .then((res) => {
             this.id = res.data.id
             this.userId = res.data.user.id

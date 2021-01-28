@@ -2,8 +2,6 @@ import axios from 'axios'
 import AuthHeader from '../services/auth-header'
 
 
-const API_URL = 'http://localhost:8080/api'
-
 const state = {
     students : [],
     id : null,
@@ -58,7 +56,7 @@ const actions = {
     getStudents({commit})
     {
         commit('switchIsGettingStudents',true)
-      axios.get(API_URL + '/students')
+      axios.get('/api/students')
       .then((res) => {
         commit('switchIsGettingStudents',false)
         commit("setStudents",res.data)
@@ -75,7 +73,7 @@ const actions = {
 
     deleteStudent({commit},item)
     {
-        axios.delete(API_URL + `/students/${item.id}`,{headers : AuthHeader()})
+        axios.delete(`/api/students/${item.id}`,{headers : AuthHeader()})
         .then(() => {
             commit("removeStudent",item)
         }).catch((err) => {

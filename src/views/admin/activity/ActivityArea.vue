@@ -83,8 +83,8 @@ export default {
   },
   created()
   {
-    const API_URL = 'http://localhost:8080/api'
-      axios.get(API_URL + '/activityareas',{ headers : authHeader() })
+    
+      axios.get('/api/activityareas',{ headers : authHeader() })
       .then((res) => {
         this.activities = res.data;
       }).catch((err) => {
@@ -137,8 +137,8 @@ export default {
     addActivity(form)
     {
       this.isLoading = true
-      const API_URL = 'http://localhost:8080/api'
-      axios.post(API_URL + '/activityareas',form, { headers : authHeader() })
+      
+      axios.post('/api/activityareas',form, { headers : authHeader() })
       .then((res) => {
         this.isLoading = false
         this.activities.unshift(res.data)
@@ -150,8 +150,7 @@ export default {
     },
     updateActivity(form)
     {
-      const API_URL = 'http://localhost:8080/api'
-      axios.put(API_URL + `/activityareas/${this.idEdit}`,form, { headers : authHeader() })
+      axios.put(`/api/activityareas/${this.idEdit}`,form, { headers : authHeader() })
       .then((res) => {
         this.activities[this.indexEdit] = res.data
         this.cancel()
@@ -170,8 +169,8 @@ export default {
     },
     deleteActivity(id,index)
     {
-      const API_URL = 'http://localhost:8080/api'
-      axios.delete(API_URL + `/activityareas/${id}`, { headers : authHeader() })
+      
+      axios.delete(`/api/activityareas/${id}`, { headers : authHeader() })
       .then(() => {
         this.activities.splice(index,1)
         this.errors = []

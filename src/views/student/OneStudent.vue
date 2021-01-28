@@ -116,9 +116,7 @@ export default {
       this.$router.push({name : 'Login'})
     }
 
-    const API_URL = "http://localhost:8080/api/"
-
-    axios.get(API_URL + `students/${this.$route.params.id}`)
+    axios.get(`/api/students/${this.$route.params.id}`)
     .then((res) => {
       this.user = res.data.user
       this.level = res.data.level.label

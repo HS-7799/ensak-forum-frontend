@@ -82,8 +82,7 @@ export default {
   },
   created()
   {
-    const API_URL = 'http://localhost:8080/api'
-      axios.get(API_URL + '/specialities',{ headers : authHeader() })
+      axios.get('/api/specialities',{ headers : authHeader() })
       .then((res) => {
         this.specialities = res.data;
       }).catch((err) => {
@@ -136,8 +135,7 @@ export default {
     addSpeciality(form)
     {
       this.isLoading = true
-      const API_URL = 'http://localhost:8080/api'
-      axios.post(API_URL + '/specialities',form, { headers : authHeader() })
+      axios.post('/api/specialities',form, { headers : authHeader() })
       .then((res) => {
         this.specialities.unshift(res.data)
         this.errors = []
@@ -149,8 +147,7 @@ export default {
     },
     updateSpeciality(form)
     {
-      const API_URL = 'http://localhost:8080/api'
-      axios.put(API_URL + `/specialities/${this.idEdit}`,form, { headers : authHeader() })
+      axios.put(`/api/specialities/${this.idEdit}`,form, { headers : authHeader() })
       .then((res) => {
         this.specialities[this.indexEdit] = res.data
         this.cancel()
@@ -170,8 +167,7 @@ export default {
     },
     deleteSpeciality(id,index)
     {
-      const API_URL = 'http://localhost:8080/api'
-      axios.delete(API_URL + `/specialities/${id}`, { headers : authHeader() })
+      axios.delete(`/api/specialities/${id}`, { headers : authHeader() })
       .then(() => {
         this.specialities.splice(index,1)
         this.errors = []

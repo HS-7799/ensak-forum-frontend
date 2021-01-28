@@ -1,7 +1,6 @@
 import axios from 'axios'
 import authHeader from '../services/auth-header'
 
-const API_URL = 'http://localhost:8080/api'
 
 
 const state = {
@@ -39,14 +38,14 @@ const actions = {
     getPosts({commit})
     {
        
-      axios.get(API_URL + '/posts')
+      axios.get('/api/posts')
       .then((res) => {
         commit("setPosts",res.data)
       })
     },
     deletePost({commit},post)
     {
-        return axios.delete(`http://localhost:8080/api/posts/${post.id}`,{headers : authHeader()})
+        return axios.delete(`/api/posts/${post.id}`,{headers : authHeader()})
       .then(() => {
         commit("removePost",post)
       })

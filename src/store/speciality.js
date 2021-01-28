@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 
-const API_URL = 'http://localhost:8080/api'
 
 const state = {
     specialities : [],
@@ -30,7 +29,7 @@ const actions = {
     getSpecialities({commit})
     {
        
-      axios.get(API_URL + '/specialities')
+      axios.get('/api/specialities')
       .then((res) => {
         commit("setSpecialities",res.data)
       }).catch((err) => {

@@ -98,7 +98,7 @@ export default {
     {
       if(this.id !== null)
       {
-        axios.get(`http://localhost:8080/api/companies/${this.id}` ,{headers : AuthHeader()})
+        axios.get(`/api/companies/${this.id}` ,{headers : AuthHeader()})
         .then((res) => {
           this.description = res.data.description
           this.activityarea = res.data.activityarea.id
@@ -131,7 +131,7 @@ export default {
           if(this.id !== null)
           {
             
-            axios.put(`http://localhost:8080/api/companies/${this.id}` ,form,{headers : AuthHeader()})
+            axios.put(`/api/companies/${this.id}` ,form,{headers : AuthHeader()})
             .then(() => {
               this.isLoading = false
             })
@@ -139,7 +139,7 @@ export default {
               this.isLoading = false
             });
           } else {
-            axios.post(`http://localhost:8080/api/companies`,form,{headers : AuthHeader()})
+            axios.post(`/api/companies`,form,{headers : AuthHeader()})
             .then(() => {
               this.isLoading = false
               this.errors = []

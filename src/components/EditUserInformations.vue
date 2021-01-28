@@ -108,7 +108,7 @@ export default {
 
           }
           this.isLoading=true
-          axios.put(`http://localhost:8080/api/auth/profile/update/${this.userId}` ,form,{headers : AuthHeader()})
+          axios.put(`/api/auth/profile/update/${this.userId}` ,form,{headers : AuthHeader()})
             .then(() => {
               this.isLoading = false
             })

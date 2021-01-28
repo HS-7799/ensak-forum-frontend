@@ -187,19 +187,18 @@ import {mapGetters} from 'vuex';
     methods : {
         submit()
         {
-            if(this.isValid && this.isValid2)
-            {
-              const API_URL = "http://localhost:8080/api/auth/"
+          if(this.isValid && this.isValid2)
+          {
 
-            const form = {
-                "name" : this.name,
-                "password" : this.password,
-                "email" : this.email,
-                "username" : this.username,
-                "Is_Completed" : false
-            }
+              const form = {
+                  "name" : this.name,
+                  "password" : this.password,
+                  "email" : this.email,
+                  "username" : this.username,
+                  "Is_Completed" : false
+              }
 
-            axios.post(API_URL + 'signup',form)
+            axios.post('/api/auth/signup',form)
             .then((res) => {
                 this.errors1 = []
                 this.isLoading = false
@@ -211,7 +210,7 @@ import {mapGetters} from 'vuex';
                     "cv" : ""
                 }
 
-                axios.post("http://localhost:8080/api/students",form)
+                axios.post("/api/students",form)
                 .then(() => {
                   this.$router.push({name : 'Admin / Student'})
                 }).catch(() => {

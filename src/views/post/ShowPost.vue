@@ -73,7 +73,7 @@ export default {
   created()
   {
     this.isLoading =true
-    axios.get(`http://localhost:8080/api/posts/${this.$route.params.id}`)
+    axios.get(`/api/posts/${this.$route.params.id}`)
     .then((res) => {
       this.isLoading = false
       this.post = res.data
@@ -126,7 +126,7 @@ export default {
     },
     quit()
     {
-      axios.delete(`http://localhost:8080/api/posts/${this.post.id}/${this.getStudentId}`,{headers : AuthHeader()})
+      axios.delete(`/api/posts/${this.post.id}/${this.getStudentId}`,{headers : AuthHeader()})
       .then(() => {
         this.isAlreadyApplied = false
         this.isApplying = false
@@ -134,7 +134,7 @@ export default {
     },
     apply()
     {
-      axios.post(`http://localhost:8080/api/posts/${this.post.id}/${this.getStudentId}`,{},{headers : AuthHeader()})
+      axios.post(`/api/posts/${this.post.id}/${this.getStudentId}`,{},{headers : AuthHeader()})
       .then(() => {
         this.isAlreadyApplied = true
         this.isApplying = false

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto mt-5" max-width="70%" >
+  <v-card class="mx-auto mt-5" max-width="60%" >
     <v-alert type="success" v-if="successMessage" >
       You are registred <router-link to="/login" >Login now</router-link>
     </v-alert>
@@ -25,8 +25,8 @@
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="3">
-            description and resume
+          <v-stepper-step step="3" :rules="[() => errors3.length > 0 ? false : true]" >
+            Description and resume
           </v-stepper-step>
         </v-stepper-header>
 
@@ -174,6 +174,11 @@
             <v-container>
                 <v-row dense >
                     <v-col cols="12">
+                      <v-alert type="error" v-if="errors3.length > 0" >
+                        <ul v-for="error in errors3" :key="error" >
+                          <li>{{ error }}</li>
+                        </ul>
+                      </v-alert>
                         <v-form>
                             <v-textarea
                             clearable
@@ -237,6 +242,7 @@ import axios from 'axios'
       email: '',
       errors1 : [],
       errors2 : [],
+      errors3 : [],
       e1 : 1,
       password : '',
       passwordConfirmation : '',
@@ -318,7 +324,6 @@ import axios from 'axios'
           if(this.isValid && this.isValid2)
           {
             
-            const API_URL = "http://localhost:8080/api/auth/"
             const form = {
                 "name" : this.name,
                 "password" : this.password,
@@ -327,14 +332,14 @@ import axios from 'axios'
                 "Is_Completed" : false
             }
 
-            axios.post(API_URL + 'signup',form)
+            axios.post('/api/auth/signup',form)
             .then((res) => {
                   this.errors1 = []
                   this.isLoading = false
                   let file = this.file;
                   let form = new FormData(); 
                   form.append('file', file);
-                  axios.post('http://localhost:8080/uploadFile',form)
+                  axios.post('/uploadFile',form)
                   .then((res1)=> {
                       this.isLoading = false
                       this.errors2 = []
@@ -346,7 +351,7 @@ import axios from 'axios'
                         "description" : this.description,
                         "fileDownloadUri" : this.file_download_uri,
                       }
-                      axios.post("http://localhost:8080/api/students",form)
+                      axios.post("/api/students",form)
                       .then(() => {
                         this.clear()
                         this.successMessage = true
@@ -360,9 +365,10 @@ import axios from 'axios'
                         });
 
                   }).catch((err) => {
-                  this.isLoading = false
-                  this.errors1 = err.response.data.message.split(',')
-                  this.errors1.pop();
+                    console.log(err.response);
+                    this.isLoading = false
+                  this.errors3 = err.response.data.message
+                  // this.errors3.pop();
               });
             }).catch((err) => {
                   this.isLoading = false

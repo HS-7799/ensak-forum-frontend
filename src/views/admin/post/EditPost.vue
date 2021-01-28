@@ -85,7 +85,7 @@ export default {
       this.$router.push({name : 'Login'})
     }
 
-    axios.get(`http://localhost:8080/api/posts/${this.$route.params.id}`)
+    axios.get(`/api/posts/${this.$route.params.id}`)
     .then((res) => {
       if(!this.getRoles.includes('ROLE_ADMIN') )
       {
@@ -110,7 +110,7 @@ export default {
         title : this.title,
         body : this.body,
       }
-      axios.put(`http://localhost:8080/api/posts/${this.$route.params.id}`,form,{headers : authHeader()})
+      axios.put(`/api/posts/${this.$route.params.id}`,form,{headers : authHeader()})
             .then((res) => {
                       this.$router.push({name : 'Admin / Post',params : { id : res.data.id }})
             }).catch((err) => {

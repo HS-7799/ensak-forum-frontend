@@ -40,13 +40,12 @@ export default {
   },
   created()
   {
-    const API_URL = "http://localhost:8080/api/auth/"
     if(!this.$store.getters.getLoggedIn)
     {
       this.$router.push({name : 'Login'})
     }
 
-    axios.get(API_URL + 'profile',{ headers : AuthHeader() })
+    axios.get('/api/auth/profile',{ headers : AuthHeader() })
     .then((res) => {
         this.userId = res.data.id
         this.roles = res.data.roles.map(role => {

@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 
-const API_URL = 'http://localhost:8080/api'
 
 const state = {
     levels : [],
@@ -30,7 +29,7 @@ const actions = {
     getLevels({commit})
     {
        
-      axios.get(API_URL + '/levels')
+      axios.get('/api/levels')
       .then((res) => {
         commit("setLevels",res.data)
       }).catch((err) => {

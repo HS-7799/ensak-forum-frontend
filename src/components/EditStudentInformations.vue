@@ -104,7 +104,7 @@ export default {
     {
       if(this.id !== null)
       {
-        axios.get(`http://localhost:8080/api/students/${this.id}`)
+        axios.get(`/api/students/${this.id}`)
         .then((res) => {
           this.description = res.data.description
           this.level = res.data.level.id
@@ -141,7 +141,7 @@ export default {
           if(this.id !== null)
           {
             
-            axios.put(`http://localhost:8080/api/students/${this.id}`,form,{headers : AuthHeader()})
+            axios.put(`/api/students/${this.id}`,form,{headers : AuthHeader()})
             .then(() => {
               this.isLoading = false
             })
@@ -149,7 +149,7 @@ export default {
               this.isLoading = false
             });
           } else {
-            axios.post(`http://localhost:8080/api/students`,form)
+            axios.post(`/api/students`,form)
             .then(() => {
               this.isLoading = false
               this.errors = []

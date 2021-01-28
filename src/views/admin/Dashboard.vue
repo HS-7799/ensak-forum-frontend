@@ -139,8 +139,7 @@ export default {
       {
         this.$router.push('/forbidden')
       } else {
-        const API_URL = 'http://localhost:8080/api'
-        axios.get(API_URL + '/test/admin',{ headers :  AuthHeader()})
+        axios.get('/api/test/admin',{ headers :  AuthHeader()})
         .then(() => {
           this.$store.commit('setRoles','ROLE_ADMIN')
         }).catch(() => {

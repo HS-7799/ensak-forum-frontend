@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
 import VueProgressBar from 'vue-progressbar'
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:8080'
 
 Vue.config.productionTip = false
 

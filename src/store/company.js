@@ -2,7 +2,6 @@ import axios from 'axios'
 import AuthHeader from '../services/auth-header'
 
 
-const API_URL = 'http://localhost:8080/api'
 
 const state = {
     companies : [],
@@ -58,7 +57,7 @@ const actions = {
     getCompanies({commit})
     {
         commit('switchIsGettingCompanies',true)
-        axios.get(API_URL + '/companies',{headers : AuthHeader()})
+        axios.get('/api/companies',{headers : AuthHeader()})
         .then((res) => {
             commit('switchIsGettingCompanies',false)
             commit("setCompanies",res.data)
@@ -75,7 +74,7 @@ const actions = {
 
     deleteCompany({commit},item)
     {
-        axios.delete(API_URL + `/companies/${item.id}`,{headers : AuthHeader()})
+        axios.delete(`/api/companies/${item.id}`,{headers : AuthHeader()})
         .then(() => {
             commit("removeCompany",item)
         }).catch((err) => {

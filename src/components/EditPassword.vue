@@ -110,7 +110,7 @@ import AuthHeader from '../services/auth-header.js';
         }
 
         this.isLoading = true
-        axios.put(`http://localhost:8080/api/auth/profile/updatepassword/${this.userId}`,form,{headers : AuthHeader()})
+        axios.put(`/api/auth/profile/updatepassword/${this.userId}`,form,{headers : AuthHeader()})
         .then((res) => {
           this.message = res.data.message
           this.errors = []

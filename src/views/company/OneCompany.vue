@@ -100,9 +100,9 @@ export default {
       this.$router.push({name : 'Login'})
     }
 
-    const API_URL = "http://localhost:8080/api/"
+    
 
-    axios.get(API_URL + `companies/${this.$route.params.id}` , { headers : AuthHeader() })
+    axios.get(`/api/companies/${this.$route.params.id}` , { headers : AuthHeader() })
     .then((res) => {
       this.user = res.data.user
       this.activityarea = res.data.activityarea.label
@@ -115,7 +115,7 @@ export default {
       }
     });
 
-    axios.get(API_URL + `companies/${this.$route.params.id}/posts`,{headers : AuthHeader()})
+    axios.get(`/api/companies/${this.$route.params.id}/posts`,{headers : AuthHeader()})
     .then((res) => {
       this.posts = res.data
     })

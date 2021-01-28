@@ -83,8 +83,7 @@ export default {
   },
   created()
   {
-    const API_URL = 'http://localhost:8080/api'
-      axios.get(API_URL + '/levels',{ headers : authHeader() })
+      axios.get('/api/levels',{ headers : authHeader() })
       .then((res) => {
         this.levels = res.data;
       }).catch((err) => {
@@ -137,8 +136,7 @@ export default {
     addLevel(form)
     {
       this.isLoading = true
-      const API_URL = 'http://localhost:8080/api'
-      axios.post(API_URL + '/levels',form, { headers : authHeader() })
+      axios.post('/api/levels',form, { headers : authHeader() })
       .then((res) => {
         this.isLoading = false
         this.levels.unshift(res.data)
@@ -150,8 +148,7 @@ export default {
     },
     updateLevel(form)
     {
-      const API_URL = 'http://localhost:8080/api'
-      axios.put(API_URL + `/levels/${this.idEdit}`,form, { headers : authHeader() })
+      axios.put(`/api/levels/${this.idEdit}`,form, { headers : authHeader() })
       .then((res) => {
         this.levels[this.indexEdit] = res.data
         this.cancel()
@@ -170,8 +167,7 @@ export default {
     },
     deleteLevel(id,index)
     {
-      const API_URL = 'http://localhost:8080/api'
-      axios.delete(API_URL + `/levels/${id}`, { headers : authHeader() })
+      axios.delete(`/api/levels/${id}`, { headers : authHeader() })
       .then(() => {
         this.levels.splice(index,1)
         this.errors = []
