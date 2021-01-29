@@ -6,6 +6,7 @@ import Register from '../views/authentication/Register.vue'
 
 import AllStudents from '../views/student/AllStudents.vue';
 import OneStudent from '../views/student/OneStudent.vue';
+import StudentPosts from '../views/student/StudentPosts.vue';
 
 import AllCompanies from '../views/company/AllCompanies.vue';
 import OneCompany from '../views/company/OneCompany.vue';
@@ -38,6 +39,7 @@ import AdminEditPost from '../views/admin/post/EditPost.vue'
 
 
 import NotFound from '../components/NotFound.vue'
+import Unauthorized from '../components/Unauthorized.vue'
 import Forbidden from '../components/Forbidden.vue'
 
 Vue.use(VueRouter)
@@ -119,6 +121,11 @@ const routes = [
     component : OneStudent
   },
   {
+    path : '/students/:id/jobs',
+    name : 'Student posts',
+    component : StudentPosts, 
+  },
+  {
     path : '/companies',
     name : 'Companies',
     component : AllCompanies
@@ -152,6 +159,11 @@ const routes = [
     path : '/forbidden',
     name : 'Error forbidden',
     component : Forbidden
+  },
+  {
+    path : '/unauthorized',
+    name : 'Error unauthorized',
+    component : Unauthorized
   },
   {
     path : '*',

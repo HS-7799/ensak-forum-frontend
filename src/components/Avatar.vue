@@ -60,6 +60,17 @@
                   My posts
                 </v-btn>
               </template>
+              <template v-if="getRoles.includes('ROLE_ETUDIANT')" >
+                <v-divider class="my-3"></v-divider>
+                <v-btn
+                  depressed
+                  rounded
+                  text
+                  :to="{ name : 'Student posts' , params : { id : $store.getters.getStudentId} }"
+                >
+                  My jobs
+                </v-btn>
+              </template>
               <v-divider class="my-3"></v-divider>
               <v-btn
                 depressed

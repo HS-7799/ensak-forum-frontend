@@ -180,18 +180,22 @@ export default {
             this.$router.push({name : 'Login'})
         } else if(!this.roles.includes("ROLE_ENTREPRISE") || this.$route.params.id != this.companyId)
         {
-            this.$router.push({name : 'Profile'})
+            this.$router.push({name : 'Error unauthorized'})
         }
         else {
+            this.getCompanyPosts()
+        }
+    },
+    methods : {
+        getCompanyPosts()
+        {
             axios.get(`/api/companies/${this.$route.params.id}/posts`,{headers : AuthHeader()})
             .then((res) => {
                 this.posts = res.data
                 this.$store.dispatch('getLevels')
                 this.$store.dispatch('getSpecialities')
             })
-        }
-    },
-    methods : {
+        },
         visitPost(id)
         {
             this.$router.push({name  : 'Post',params : {id : id}})
