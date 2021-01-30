@@ -1,6 +1,7 @@
 <template>
   <v-container>
-    <v-row>
+    <h1>Students</h1>
+    <v-row v-if="students.length > 0" >
       <v-col cols="12" md="4">
           <v-card>
             <v-card-title>Filter by</v-card-title>
@@ -35,10 +36,22 @@
         <template v-else >
           <v-card>
             <v-card-title>
-              No students available
+              No students matching the filter!
             </v-card-title>
           </v-card>
         </template>
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-col cols="12">
+        <v-card>
+              <v-card-text>
+                <div style="text-align:center" >
+                  <img src="@/assets/students.png" alt="" width="200px">
+                  <p>No Students available yet !</p>
+                </div>
+              </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
     

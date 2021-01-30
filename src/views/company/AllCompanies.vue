@@ -1,6 +1,7 @@
 <template>
   <v-container>
-    <v-row>
+    <h1>Companies</h1>
+    <v-row v-if="companies.length > 0" >
       <v-col cols="12" md="4">
           <v-card>
             <v-card-title>Filter by</v-card-title>
@@ -25,9 +26,21 @@
           </template>
           <template v-else >
             <v-card>
-              <v-card-title>No companies available</v-card-title>
+              <v-card-title>No companies in this activity area </v-card-title>
             </v-card>
           </template>
+      </v-col>
+    </v-row>
+    <v-row v-else >
+      <v-col cols="12">
+        <v-card>
+              <v-card-text>
+                <div style="text-align:center" >
+                  <img src="@/assets/companies.png" alt="" width="200px">
+                  <p>No Companies available yet !</p>
+                </div>
+              </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
     
