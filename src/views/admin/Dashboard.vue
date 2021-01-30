@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="main-dashboard" >
     <v-app-bar color="#4BBAFC" dark >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title >
@@ -44,10 +44,7 @@
     <v-container>
       <v-row dense v-if="$route.name === 'Admin'" >
         <v-col cols="6" >
-          <v-card
-            color="teal lighten-3"
-            dark
-          >
+          <v-card>
             <v-card-title class="headline">
               {{ getLevels.length }}
             </v-card-title>
@@ -60,8 +57,7 @@
         </v-col>
         <v-col cols="6" >
           <v-card
-            color="red lighten-3"
-            dark
+            
           >
             <v-card-title class="headline">
               {{ getSpecialities.length }}
@@ -75,8 +71,7 @@
         </v-col>
         <v-col cols="6" >
           <v-card
-            color="pink lighten-2"
-            dark
+            
           >
             <v-card-title class="headline">
               {{ getActivityareas.length }}
@@ -90,8 +85,7 @@
         </v-col>
         <v-col cols="6" >
           <v-card
-            color="brown lighten-1"
-            dark
+            
           >
             <v-card-title class="headline">
               {{ getPosts.length }}
@@ -105,8 +99,7 @@
         </v-col>
         <v-col cols="6" >
           <v-card
-            color="purple lighten-2"
-            dark
+            
           >
             <v-card-title class="headline">
               {{ getStudents.length }}
@@ -120,7 +113,6 @@
         </v-col>
         <v-col cols="6" >
           <v-card
-            color="orange lighten-4" dark
           >
             <v-card-title class="headline">
               {{ getCompanies.length }}
@@ -223,6 +215,10 @@ export default {
 </script>
 
 <style scoped >
-
+#main-dashboard
+{
+  background-color : #faf9f8;
+  min-height: 100vh;
+}
 
 </style>
