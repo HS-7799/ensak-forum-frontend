@@ -7,7 +7,7 @@
             <v-list-item>
               <v-list-item-avatar size="100">
                   <img
-                    src="https://www.w3schools.com/howto/img_avatar.png"
+                    src="@/assets/students.png"
                     alt="John"
                   >
               </v-list-item-avatar>

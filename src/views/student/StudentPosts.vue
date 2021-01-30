@@ -1,22 +1,25 @@
 <template>
   <div class="row">
-    <v-col cols="8" class="mx-auto">
+    <div class="text-center spinner" v-if="waitingRes" >
+      <v-progress-circular color="primary" class="loader" :size="70" indeterminate ></v-progress-circular>
+    </div>
+    <v-col cols="8" class="mx-auto" >
       <template v-if="posts.length > 0" >
               <app-single-post v-for="post in posts" :key="post.id" :post="post" ></app-single-post>
       </template>
       <template v-else>
         <v-card width="50%" class="mx-auto mt-6" >
           <v-card-title>
-              You did not apply for ny job
-          </v-card-title>
-          <v-card-actions>
-              <v-btn color="primary" to="/posts"  >
+              <span>You did not apply for any job!</span>
+              <v-btn color="primary" text to="/posts"  >
                   Search job
               </v-btn>
-          </v-card-actions>
+          </v-card-title>
+         
         </v-card>
       </template>
     </v-col>
+
   </div>
 </template>
 
@@ -28,7 +31,8 @@ import SinglePost from '../../components/post/SinglePost.vue';
 export default {
 
     data : () => ({
-        posts : []
+        posts : [],
+        waitingRes : true
     }),
     created()
     {
@@ -54,6 +58,7 @@ export default {
             {
                 const response = await axios.get(`/api/students/${this.$route.params.id}/posts`,{headers : authHeader()})
                 this.posts = response.data
+                this.waitingRes = false
             }
             catch(err)
             {

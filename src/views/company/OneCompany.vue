@@ -1,13 +1,13 @@
 <template>
   <div>
     <v-card class="mx-auto mt-2" max-width="1150" tile>
-      <v-img height="200" src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"></v-img>
+      <v-img height="200" src="@/assets/company_bg.jpg"></v-img>
       <v-row style="margin:2.5%;position:absolute; top: 130px">
 
             <v-list-item>
               <v-list-item-avatar size="100">
                   <img
-                    src="https://www.w3schools.com/howto/img_avatar.png"
+                    src="@/assets/student_avatar.png"
                     alt="John"
                   >
               </v-list-item-avatar>
