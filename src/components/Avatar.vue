@@ -96,7 +96,7 @@
                 text
                 @click="logout"
               >
-                Disconnect
+                Logout
               </v-btn>
             </div>
           </v-list-item-content>

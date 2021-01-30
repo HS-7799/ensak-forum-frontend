@@ -19,7 +19,6 @@
             <template v-if="!getLoggedIn">
               <v-list-item :to="{ name : 'Login' }"  >
               <v-list-item-title>
-                <!-- <v-icon>mdi-login</v-icon> -->
                 Login
               </v-list-item-title>
             </v-list-item>
@@ -44,16 +43,30 @@
                 </v-list-item-title>
               
               </v-list-item>
+              <v-list-item :to="{name : 'Student posts', params : {id : getStudentId }}" v-if="getRoles.includes('ROLE_ETUDIANT')" >
+                <v-list-item-title>
+                  My jobs
+                </v-list-item-title>
+              
+              </v-list-item>
+              <v-list-item :to="{name : 'Messages'}" v-if="getRoles.includes('ROLE_ETUDIANT')" >
+                <v-list-item-title>
+                  Messages
+                </v-list-item-title>
+              
+              </v-list-item>
+              <v-divider></v-divider>
+
               <v-list-item :to="{ name : 'Profile'}" >
                 <v-list-item-title>
-                  <v-icon>mdi-account-edit</v-icon>
+                  <!-- <v-icon>mdi-account</v-icon> -->
                   Account
                 </v-list-item-title>
               
               </v-list-item>
               <v-list-item :to="{ name : 'Edit Profile'}" >
                 <v-list-item-title>
-                  <v-icon>mdi-account</v-icon>
+                  <!-- <v-icon>mdi-account-edit</v-icon> -->
                   Edit Account
                 </v-list-item-title>
               
@@ -68,7 +81,7 @@
                 </v-list-item-title>
               
               </v-list-item>
-              <v-list-item :to="{ name : 'Students' }" >
+              <v-list-item :to="{ name : 'Students' }">
                 <v-list-item-title>
                   <v-icon></v-icon>
                   Students
@@ -97,19 +110,10 @@
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items class="d-none d-sm-flex" >
-              <v-btn text  :to="{ name : 'Posts' }">
-                  <v-icon></v-icon>
-                  Posts
-                </v-btn>
+              <v-btn text  :to="{ name : 'Posts' }">Posts</v-btn>
               <template v-if="!getLoggedIn">
-                <v-btn text  :to="{ name : 'Login' }"  >
-                  <!-- <v-icon>mdi-login</v-icon> -->
-                  Login
-                </v-btn>
-              <v-btn text  :to="{ name : 'Register' }">
-                <v-icon></v-icon>
-                Register
-              </v-btn>
+                <v-btn text  :to="{ name : 'Login' }"  >Login</v-btn>
+                <v-btn text  :to="{ name : 'Register' }">Register</v-btn>
               </template>
               <template v-else >
                 
@@ -120,6 +124,9 @@
                 <v-btn text  :to="{ name : 'Students' }">
                   <v-icon></v-icon>
                   Students
+                </v-btn>
+                <v-btn text icon :to="{ name : 'Messages' }" v-if="getRoles.includes('ROLE_ETUDIANT')"  >
+                  <v-icon>mdi-message-text-outline</v-icon>
                 </v-btn>
                 <app-avatar></app-avatar>
               </template>
@@ -143,7 +150,8 @@ export default {
       'getLoggedIn',
       'getRoles',
       'getId',
-      'getCompanyId'
+      'getCompanyId',
+      'getStudentId',
     ])
   },
   components : {

@@ -37,6 +37,7 @@ import EditCompany from '../views/admin/company/EditCompany.vue'
 import AdminPost from '../views/admin/post/Post.vue'
 import AdminEditPost from '../views/admin/post/EditPost.vue'
 
+import Messages from '../views/Messages.vue'
 
 import NotFound from '../components/NotFound.vue'
 import Unauthorized from '../components/Unauthorized.vue'
@@ -154,6 +155,11 @@ const routes = [
     path : '/companies/:id/posts',
     name : 'Company posts',
     component : CompanyPosts
+  },
+  {
+    path : '/messages',
+    name : 'Messages',
+    component : Messages
   },
   {
     path : '/forbidden',
