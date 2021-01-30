@@ -108,7 +108,7 @@
                     </v-form>
           </v-card-text>
       </v-card>
-      <v-btn color="#4BBAFC" :disabled="!isValid2" @click="submit">Add student</v-btn>
+      <v-btn color="#4BBAFC" :disabled="!isValid2" :loading="isLoading" @click="submit">Add student</v-btn>
       <v-btn text @click="e = 1" >Cancel</v-btn>
     </v-stepper-content>
 
@@ -197,11 +197,11 @@ import {mapGetters} from 'vuex';
                   "username" : this.username,
                   "Is_Completed" : false
               }
-
+            this.isLoading = true
             axios.post('/api/auth/signup',form)
             .then((res) => {
                 this.errors1 = []
-                this.isLoading = false
+                
                 const form = {
                     "user" : { id : res.data },
                     "level" : { id : this.level },
@@ -209,9 +209,9 @@ import {mapGetters} from 'vuex';
                     "description" : "",
                     "cv" : ""
                 }
-
                 axios.post("/api/students",form)
                 .then(() => {
+                  this.isLoading = false
                   this.$router.push({name : 'Admin / Student'})
                 }).catch(() => {
                   if(!this.isValid2)

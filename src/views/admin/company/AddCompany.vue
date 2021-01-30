@@ -117,7 +117,7 @@
                     </v-form>
           </v-card-text>
       </v-card>
-      <v-btn color="#4BBAFC" :disabled="!isValid2" @click="submit">Add company</v-btn>
+      <v-btn color="#4BBAFC" :disabled="!isValid2" :loading="isLoading" @click="submit">Add company</v-btn>
       <v-btn text @click="e = 1" >Cancel</v-btn>
     </v-stepper-content>
 
@@ -207,11 +207,12 @@ import {mapGetters} from 'vuex';
                 "role" : ['entreprise'],
                
             }
+            this.isLoading = true
 
             axios.post('/api/auth/signup',form, { headers : authHeader() })
             .then((res) => {
                 this.errors1 = []
-                this.isLoading = false
+                
                 const form = {
                     "user" : { id : res.data },
                     "activityarea" : { id : this.activityarea },
@@ -220,6 +221,7 @@ import {mapGetters} from 'vuex';
                 }
                 axios.post("/api/companies",form, { headers : authHeader() })
                 .then(() => {
+                  this.isLoading = false
                   this.$router.push({name : 'Admin / Company'})
                 }).catch(() => {
                   
