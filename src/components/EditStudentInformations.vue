@@ -152,9 +152,10 @@ export default {
             });
           } else {
             axios.post(`/api/students`,form)
-            .then(() => {
+            .then((res) => {
               this.$store.dispatch('setShowSnack',true)
               this.$store.dispatch('setSnackMessage','Informations are updated successfully')
+              this.$store.dispatch("setStudentId",res.data)
               this.isLoading = false
               this.errors = []
             })

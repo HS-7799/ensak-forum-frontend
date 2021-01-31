@@ -1,229 +1,197 @@
 <template>
-  <v-card class="mx-auto mt-5" max-width="60%" >
-      <v-stepper v-model="e1">
-        <v-stepper-header>
-          <v-stepper-step
-            :complete="e1 > 1"
-            step="1"
-            :rules="[() => errors1.length > 0 ? false : true]"
-          >
-            User informations
-          </v-stepper-step>
-
-          <v-divider></v-divider>
-
-          <v-stepper-step
-            :complete="e1 > 2"
-            step="2"
-            :rules="[() => errors2.length > 0 ? false : true]"
-          >
-            Level and speciality
-          </v-stepper-step>
-
-          <v-divider></v-divider>
-
-          <v-stepper-step step="3" :rules="[() => errors3.length > 0 ? false : true]" >
-            Description and resume
-          </v-stepper-step>
-        </v-stepper-header>
-
-        <v-stepper-items>
-          <v-stepper-content step="1">
-            <v-card
-              max-width="450"
-                class="mx-auto mb-2"
-            >
-            <v-container>
-          <v-row dense>
-            <v-col cols="12">
-                <v-alert type="error" v-if="errors1.length > 0" >
-                <ul v-for="error in errors1" :key="error" >
-                  <li>{{ error }}</li>
-                </ul>
-              </v-alert>
-              <v-form
-                ref="form"
-                v-model="valid"
+      <v-container>
+        <v-row dense style="justify-content:center">
+          <v-col cols="12" md="10" lg="8" >
+          <v-card width="100%"  class="mx-auto mt-7"  >
+            <h2 style="text-align:center" >
+            <span id="login" >REGISTER</span>
+            </h2>
+            <v-stepper v-model="e1">
+              <v-stepper-header >
+                <v-stepper-step
+                  :complete="e1 > 1"
+                  step="1"
+                  :rules="[() => errors1.length > 0 ? false : true]"
                 >
-                    <v-text-field
-                    v-model="name"
-                    :counter="20"
-                    :rules="nameRules"
-                    label="Name"
-                    required
-                    ></v-text-field>
+                  User informations
+                </v-stepper-step>
 
-                    <v-text-field
-                    v-model="username"
-                    :counter="20"
-                    :rules="userNameRules"
-                    label="Userame"
-                    required
-                    ></v-text-field>
+                <v-divider></v-divider>
 
-                    <v-text-field
-                    v-model="email"
-                    type="email"
-                    :rules="emailRules"
-                    label="E-mail"
-                    required
-                    ></v-text-field>
-
-                    <v-text-field
-                    v-model="password"
-                    :counter="40"
-                    :rules="passwordRules"
-                    label="Password"
-                    :type="showPassword ? 'text' : 'password'"
-                    :append-icon="showPassword ? 'mdi-eye':'mdi-eye-off'"
-                    @click:append="showPassword = !showPassword"
-                    required
+                <v-stepper-step
+                  :complete="e1 > 2"
+                  step="2"
+                  :rules="[() => errors2.length > 0 ? false : true]"
                 >
-                </v-text-field>
-                <v-text-field
-                    v-model="passwordConfirmation"
-                    :counter="40"
-                    :rules="[(password === passwordConfirmation) || 'password must match',
-                            (!!passwordConfirmation || 'Password confirmation is required')]"
-                    label="Confirm Password"
-                    :type="showPasswordConfirmation ? 'text' : 'password'"
-                    :append-icon="showPasswordConfirmation ? 'mdi-eye':'mdi-eye-off'"
-                    @click:append="showPasswordConfirmation = !showPasswordConfirmation"
-                    required
-                >
-                </v-text-field>
+                  Level and speciality
+                </v-stepper-step>
 
-                    <v-btn block tile class="my-2" @click="clear">
-                        clear
-                    </v-btn>
+                <v-divider></v-divider>
 
-                </v-form>
-            </v-col>
-          </v-row>
-        </v-container>
-            </v-card >
+                <v-stepper-step step="3" >
+                  Description
+                </v-stepper-step>
+              </v-stepper-header>
 
-            <v-btn
-              color="primary"
-              :disabled="!valid"
-              @click="toStepTwo"
-            >
-            
-              Continue
-            </v-btn>
-          </v-stepper-content>
+              <v-stepper-items>
+                <v-stepper-content step="1">
+                  
+                  <v-alert type="error" v-if="errors1.length > 0" >
+                    <ul v-for="error in errors1" :key="error" >
+                      <li>{{ error }}</li>
+                    </ul>
+                  </v-alert>
+                  <v-form
+                    ref="form"
+                    v-model="valid"
+                    >
+                        <v-text-field
+                        v-model="name"
+                        :counter="20"
+                        :rules="nameRules"
+                        label="Name"
+                        required
+                        ></v-text-field>
 
-          <v-stepper-content step="2">
-            <v-card
-              max-width="450"
-              min-height="420"
-                class="mx-auto mb-2"
-            >
-            <v-container>
-            <v-row dense>
-                <v-col cols="12" class="mt-10 mb-1">
+                        <v-text-field
+                        v-model="username"
+                        :counter="20"
+                        :rules="userNameRules"
+                        label="Userame"
+                        required
+                        ></v-text-field>
+
+                        <v-text-field
+                        v-model="email"
+                        type="email"
+                        :rules="emailRules"
+                        label="E-mail"
+                        required
+                        ></v-text-field>
+
+                        <v-text-field
+                        v-model="password"
+                        :counter="40"
+                        :rules="passwordRules"
+                        label="Password"
+                        :type="showPassword ? 'text' : 'password'"
+                        :append-icon="showPassword ? 'mdi-eye':'mdi-eye-off'"
+                        @click:append="showPassword = !showPassword"
+                        required
+                    >
+                    </v-text-field>
+                    <v-text-field
+                        v-model="passwordConfirmation"
+                        :counter="40"
+                        :rules="[(password === passwordConfirmation) || 'password must match',
+                                (!!passwordConfirmation || 'Password confirmation is required')]"
+                        label="Confirm Password"
+                        :type="showPasswordConfirmation ? 'text' : 'password'"
+                        :append-icon="showPasswordConfirmation ? 'mdi-eye':'mdi-eye-off'"
+                        @click:append="showPasswordConfirmation = !showPasswordConfirmation"
+                        required
+                    >
+                    </v-text-field>
+
+                        <v-btn block tile class="my-2" @click="clear">
+                            clear
+                        </v-btn>
+
+                  </v-form>
+                    
+                  <v-btn
+                    color="primary"
+                    :disabled="!valid"
+                    @click="toStepTwo"
+                  >
+                    Continue
+                  </v-btn>
+                </v-stepper-content>
+
+                <v-stepper-content step="2">
+                  
                   <v-alert type="error" v-if="errors2.length > 0" >
                     <ul v-for="error in errors2" :key="error" >
                       <li>{{ error }}</li>
                     </ul>
                   </v-alert>
-                <v-form>
+                  <v-form>
+                            <v-select
+                            v-model="level"
+                            :items="levels"
+                            item-value="id"
+                            item-text="label"
+                            label="Level"
+                        ></v-select>
                         <v-select
-                        v-model="level"
-                        :items="levels"
-                        item-value="id"
-                        item-text="label"
-                        label="Level"
-                    ></v-select>
-                    <v-select
-                        v-model="speciality"
-                        :items="specialities"
-                        item-value="id"
-                        item-text="label"
-                        label="Speciality"
-                    ></v-select>
+                            v-model="speciality"
+                            :items="specialities"
+                            item-value="id"
+                            item-text="label"
+                            label="Speciality"
+                        ></v-select>
 
-                    </v-form>
-                </v-col>
-            </v-row>
-            
-            </v-container>
-            </v-card>
-            <v-btn
-              color="primary"
-              @click="e1 = 3"
-              :disabled="!isValid2"
-            >
-              Continue
-            </v-btn>
+                  </v-form>
+                      
+                  <v-btn
+                    color="primary"
+                    @click="e1 = 3"
+                    :disabled="!isValid2"
+                  >
+                    Continue
+                  </v-btn>
 
-            <v-btn text @click="e1 = 1" >
-              Cancel
-            </v-btn>
-          </v-stepper-content>
+                  <v-btn text @click="e1 = 1" >
+                    Cancel
+                  </v-btn>
+                </v-stepper-content>
 
-          <v-stepper-content step="3">
-            <v-card
-              max-width="450"
-              min-height="400"
-                class="mx-auto mb-2"
-            >
-            <v-container>
-                <v-row dense >
-                    <v-col cols="12">
-                      <v-alert type="error" v-if="errors3.length > 0" >
-                        <ul v-for="error in errors3" :key="error" >
-                          <li>{{ error }}</li>
-                        </ul>
-                      </v-alert>
-                        <v-form>
-                            <v-textarea
-                            clearable
-                            clear-icon="mdi-close"
-                            label="About you"
-                            v-model="description"
-                            ></v-textarea>
+                <v-stepper-content step="3">
+                  <v-form>
+                      <v-textarea
+                      clearable
+                      clear-icon="mdi-close"
+                      label="About you"
+                      v-model="description"
+                      ></v-textarea>
 
-                        <v-file-input
-                            v-model="file"
-                            placeholder="Upload your resume"
-                            label="Resume"
-                            prepend-icon="mdi-paperclip"
-                        >
-                            <template v-slot:selection="{ text }">
-                                <v-chip
-                                small
-                                label
-                                color="primary"
-                                >
-                                {{ text }}
-                                </v-chip>
-                            </template>
-                        </v-file-input>
-                        <v-btn
-                        :loading="isLoading"
-                        color="primary"
-                        tile
-                        block
-                        @click="register">   
-                        Register
-                        </v-btn>
-                        </v-form>
-                    </v-col>
-                </v-row>
-            </v-container>
-
-            </v-card>
-
-            
-
-            <v-btn text @click="e1 = 2">
-              Cancel
-            </v-btn>
-          </v-stepper-content>
-        </v-stepper-items>
-      </v-stepper>
-  </v-card>
+                  <!-- <v-file-input
+                      v-model="file"
+                      placeholder="Upload your resume"
+                      label="Resume"
+                      prepend-icon="mdi-paperclip"
+                  >
+                      <template v-slot:selection="{ text }">
+                          <v-chip
+                          small
+                          label
+                          color="primary"
+                          >
+                          {{ text }}
+                          </v-chip>
+                      </template>
+                  </v-file-input> -->
+                  <v-btn
+                  :loading="isLoading"
+                  color="primary"
+                  tile
+                  block
+                  @click="register"
+                  >   
+                    Register
+                  </v-btn>
+                  </v-form>
+                          
+                  <v-btn text @click="e1 = 2">
+                    Cancel
+                  </v-btn>
+                </v-stepper-content>
+              </v-stepper-items>
+            </v-stepper>
+          </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
 </template>
 
 <script>
@@ -239,7 +207,6 @@ import axios from 'axios'
       email: '',
       errors1 : [],
       errors2 : [],
-      errors3 : [],
       e1 : 1,
       password : '',
       passwordConfirmation : '',
@@ -269,7 +236,6 @@ import axios from 'axios'
       showPasswordConfirmation : false,
       level : null,
       speciality : null,
-      file : [],
       description : null,
       file_download_uri : null
     }), 
@@ -315,12 +281,10 @@ import axios from 'axios'
         this.$store.dispatch('getSpecialities') 
       },
       register()
-      {
-          this.isLoading = true
-           
+      { 
           if(this.isValid && this.isValid2)
           {
-            
+            this.isLoading = true
             const form = {
                 "name" : this.name,
                 "password" : this.password,
@@ -332,44 +296,34 @@ import axios from 'axios'
             axios.post('/api/auth/signup',form)
             .then((res) => {
                 this.errors1 = []
-                let file = this.file;
-                let form = new FormData(); 
-                form.append('file', file);
-                axios.post('/uploadFile',form)
-                .then((res1)=> {
-                    this.errors2 = []
-                    this.file_download_uri=res1.data
-                    const form = {
+                const form = {
                       "user" : { id : res.data },
                       "level" : { id : this.level },
                       "speciality" : { id : this.speciality },
                       "description" : this.description,
                       "fileDownloadUri" : this.file_download_uri,
                     }
-                    axios.post("/api/students",form)
-                    .then(() => {
-                      this.clear()
-                      this.$store.dispatch('setShowSnack',true)
-                      this.$store.dispatch('setSnackMessage','You are registred successfully')
-                      this.isLoading = false;
-                    })
-                    .catch(() => {
-                      if(!this.isValid2)
-                      {
-                        this.errors2 = ["all fields are required"]
-                      }
-                      this.isLoading = false;
-                      });
-
-                }).catch((err) => {
-                  this.isLoading = false
-                  this.errors3 = err.response.data.message
-              });
-            }).catch((err) => {
+                axios.post("/api/students",form)
+                .then(() => {
+                  this.clear()
+                  this.$store.dispatch('setShowSnack',true)
+                  this.$store.dispatch('setSnackMessage','You are registred successfully')
+                  this.isLoading = false;
+                })
+                .catch(() => {
+                  if(!this.isValid2)
+                  {
+                    this.errors2 = ["all fields are required"]
+                  }
+                  this.isLoading = false;
+                });
+                
+            })
+            .catch((err) => {
                   this.isLoading = false
                   this.errors1 = err.response.data.message.split(',')
                   this.errors1.pop();
-              });
+            });
             }
         },
       clear() {
@@ -388,5 +342,10 @@ import axios from 'axios'
 span
 {
   display: block;
+}
+
+.v-stepper__header,.v-stepper.theme--light
+{
+  box-shadow: none;
 }
 </style>

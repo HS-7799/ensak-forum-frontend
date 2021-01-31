@@ -3,7 +3,7 @@
         <v-snackbar
           v-model="snackbar"
           :timeout="timeout"
-           color="success"
+           :color="$store.getters.getColorSnack"
           absolute
           right 
           top
@@ -20,7 +20,8 @@ export default {
     data: () => ({
       snackbar: true,
       timeout: 2000
-    })
+    }),
+    
     
 }
 </script>

@@ -142,7 +142,13 @@ export default {
         this.isApplying = false
       })
       .catch(err => {
-        console.log(err);
+        this.isApplying = false
+        if(err.response.status == 400 && this.getStudentId == null)
+        {
+          this.$store.dispatch('setShowSnack',true)
+          this.$store.dispatch('setSnackColor','error')
+          this.$store.dispatch('setSnackMessage','Please complete you registration')
+        }
       }) 
     },
     formatDate (input) {

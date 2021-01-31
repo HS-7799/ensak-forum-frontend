@@ -62,7 +62,13 @@ export default {
             }
             catch(err)
             {
-                console.log(err.response);
+                this.waitingRes = false
+                if(err.response.status == 400 && this.$store.getters.getStudentId == null )
+                {
+                    this.$store.dispatch('setShowSnack',true)
+                    this.$store.dispatch('setSnackColor','error')
+                    this.$store.dispatch('setSnackMessage','Please complete you registration')
+                }
             }
         }
     },

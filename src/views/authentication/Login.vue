@@ -1,10 +1,11 @@
 <template>
   <v-card max-width="450" min-height="250px" class="mx-auto mt-16" >
-    
     <v-container>
       <v-row dense>
         <v-col cols="12">
-          <h2 style="text-align:center" >LOGIN</h2>
+          <h2 style="text-align:center" >
+            <span id="login" >LOGIN</span>
+          </h2>
           <v-alert type="error" v-if="errors.length > 0" >
             <ul v-for="error in errors" :key="error" >
               <li>{{ error }}</li>
@@ -46,6 +47,7 @@
                 >
                 Login
                 </v-btn>
+                Need an account ? <router-link style="text-decoration:none" color="primary" to="/register" >register</router-link>
 
             </v-form>
         </v-col>
@@ -125,7 +127,9 @@ import axios from 'axios'
           }).catch((err) => {
               if(err.response.data.details === "")
               {
-                this.errors.push("Bad credentials")
+                this.$store.dispatch('setShowSnack',true)
+                this.$store.dispatch('setSnackMessage','Bad credentials')
+                this.$store.dispatch('setSnackColor','error')
               }
               else
               {
@@ -143,3 +147,13 @@ import axios from 'axios'
     },
   }
 </script>
+
+<style>
+
+#login
+{
+  display: inline;
+  border-bottom: 4px solid orange ;
+}
+
+</style>

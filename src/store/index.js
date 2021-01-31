@@ -15,7 +15,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     showSnack : false,
-    snackMessage : ''
+    snackMessage : '',
+    colorSnack : 'success'
   },
   getters : {
     getShowSnackbar(state)
@@ -25,6 +26,10 @@ export default new Vuex.Store({
     getSnackMessage(state)
     {
       return state.snackMessage
+    },
+    getColorSnack(state)
+    {
+      return state.colorSnack
     }
   },
   mutations: {
@@ -35,7 +40,11 @@ export default new Vuex.Store({
     setSnackMessage(state,value)
     {
       state.snackMessage = value
-    }
+    },
+    setSnackColor(state,value)
+    {
+      state.colorSnack = value
+    },
   },
   actions: {
     setShowSnack({commit},value)
@@ -48,7 +57,14 @@ export default new Vuex.Store({
     setSnackMessage({commit},value)
     {
       commit('setSnackMessage',value)
-    }
+    },
+    setSnackColor({commit},value)
+    {
+      commit('setSnackColor',value)
+      setTimeout(function(){
+        commit('setSnackColor','success')
+      },2500)
+    },
   },
   modules : {
     auth,
