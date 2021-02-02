@@ -30,6 +30,7 @@
     >
           <template v-slot:[`item.cv`]="{ item }">
             <v-btn
+              v-if="item.cv"
               :href="item.cv"
               color="blue-grey"
               small
@@ -41,6 +42,7 @@
                 mdi-cloud-download
               </v-icon>
             </v-btn>
+            <span v-else >No uploaded yet</span>
           </template>
 
 

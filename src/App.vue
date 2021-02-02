@@ -4,9 +4,7 @@
       <template v-if="!pageForAdmin" >
         <app-header></app-header>
         <v-main class="main" >
-          <!-- <transition name="slide" mode="out-in" > -->
             <router-view ></router-view>
-          <!-- </transition> -->
           <vue-progress-bar></vue-progress-bar>
         </v-main>
         <app-footer></app-footer>
@@ -78,40 +76,4 @@ export default {
   background: url("https://res.cloudinary.com/finnhvman/image/upload/v1541930411/pattern.png");
 
 }
-
-
-.slide-enter-active
-{
-  animation: slide-in 0.2s ease-out forwards;
-}
-
-.slide-leave-active
-{
-  animation: slide-out 0.2s ease-out forwards;
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slide-out {
-  from {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-}
-
-
-
 </style>

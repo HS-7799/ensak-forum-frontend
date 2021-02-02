@@ -125,7 +125,7 @@
                   <v-icon></v-icon>
                   Students
                 </v-btn>
-                <v-btn text icon :to="{ name : 'Messages' }" v-if="getRoles.includes('ROLE_ETUDIANT')"  >
+                <v-btn text icon :to="{ name : 'Messages' }" v-if="getRoles.includes('ROLE_ETUDIANT') || getRoles.includes('ROLE_ENTREPRISE')"  >
                   <v-icon>mdi-message-text-outline</v-icon>
                 </v-btn>
                 <app-avatar></app-avatar>

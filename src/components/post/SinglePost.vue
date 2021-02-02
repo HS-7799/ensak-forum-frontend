@@ -6,7 +6,7 @@
                     src="https://www.w3schools.com/howto/img_avatar.png"
                   >
               </v-list-item-avatar>
-              <v-list-item-title style="margin-top:10%" >
+              <v-list-item-title style="margin-top:20%" >
                 <h5>{{ post.company.user.name }} - {{ post.location }}</h5>
               </v-list-item-title>
               

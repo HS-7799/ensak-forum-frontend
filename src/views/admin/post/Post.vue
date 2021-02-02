@@ -55,7 +55,6 @@ export default {
         dialogDelete : false,
         headers: [
           {text: 'title',align: 'start',filterable: true,value: 'title',},
-          { text: 'body', value: 'body',sortable : false },
           { text: 'company', value: 'company',sortable : false },
           { text: 'published', value: 'created_at',sortable : true },
           { text: 'location', value: 'location',sortable : false },
@@ -76,7 +75,6 @@ export default {
         return this.getPosts.map(post => {
               return {
                 id : post.id,
-                body : post.body,
                 created_at:post.createdAt,
                 update_at:post.updatedAt,
                 title:post.title,

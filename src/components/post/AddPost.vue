@@ -8,7 +8,7 @@
       <template v-slot:activator="{ on, attrs }" >
         <v-btn
           class="ml-auto mr-3"
-          color="primary"
+          color="#4BBAFC"
           dark
           tile
           v-bind="attrs"
