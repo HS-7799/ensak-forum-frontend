@@ -9,6 +9,7 @@ import activities from './activities'
 import student from './student'
 import company from './company'
 import post from './post'
+import message from './message'
 
 Vue.use(Vuex)
 
@@ -73,7 +74,8 @@ export default new Vuex.Store({
     student,
     company,
     activities,
-    post
+    post,
+    message
   },
   plugins: [createPersistedState()]
 })
