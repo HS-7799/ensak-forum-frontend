@@ -81,6 +81,15 @@ const mutations = {
 
 const actions = {
 
+    setName({commit},name)
+    {
+        commit('setName',name)
+    },
+
+    setEmail({commit},email)
+    {
+        commit('setEmail',email)
+    },
     setUser({commit},user)
     {
         commit('setId',user.id)

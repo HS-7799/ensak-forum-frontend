@@ -38,7 +38,7 @@
                 label="address"
                 required
                 ></v-text-field>
-            <v-file-input
+            <!-- <v-file-input
               v-model="files"
               placeholder="Upload logo"
               label="Logo"
@@ -54,7 +54,7 @@
                   {{ text }}
                 </v-chip>
               </template>
-          </v-file-input>
+          </v-file-input> -->
                 
             
           <v-btn
@@ -87,7 +87,7 @@ export default {
             valid : true,
             isLoading : false,
             errors : [],
-            files : [],
+            // files : [],
             activityarea : null,
             description : '',
             address : '',
@@ -133,7 +133,7 @@ export default {
             axios.put(`/api/companies/${this.id}` ,form,{headers : AuthHeader()})
             .then(() => {
               this.$store.dispatch('setShowSnack',true)
-              this.$store.dispatch('setSnackMessage','Informations are updated successfully')
+              this.$store.dispatch('setSnackMessage','Company informations are updated successfully')
               this.isLoading = false
             })
             .catch(() => {
@@ -143,7 +143,7 @@ export default {
             axios.post(`/api/companies`,form,{headers : AuthHeader()})
             .then(() => {
               this.$store.dispatch('setShowSnack',true)
-              this.$store.dispatch('setSnackMessage','Informations are updated successfully')
+              this.$store.dispatch('setSnackMessage','Company informations are updated successfully')
               this.isLoading = false
               this.errors = []
             })

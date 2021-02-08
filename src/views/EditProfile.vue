@@ -17,9 +17,14 @@
             <v-tab @click="selectedCmp = 'appEditPassword'" >
               Password
             </v-tab>
-            <v-tab v-if="roles.includes('ROLE_ETUDIANT')"  @click="selectedCmp = 'appEditStudentInformations'" >
+            <template v-if="roles.includes('ROLE_ETUDIANT')" >
+            <v-tab @click="selectedCmp = 'appEditStudentInformations'" >
               Student informations
             </v-tab>
+            <v-tab @click="selectedCmp = 'appEditStudentResume'" >
+              Upload Resumue
+            </v-tab>
+            </template>
             <v-tab v-if="roles.includes('ROLE_ENTREPRISE')" @click="selectedCmp = 'appEditCompanyInformations'" >
               Company informations
             </v-tab>
@@ -48,6 +53,7 @@ import User from '../Helpers/User'
 import EditUserInformations from '../components/EditUserInformations'
 import EditPassword from '../components/EditPassword'
 import EditStudentInformations from '../components/EditStudentInformations'
+import EditStudentResume from '../components/EditStudentResume'
 import EditCompanyInformations from '../components/EditCompanyInformations'
 export default {
 
@@ -103,6 +109,7 @@ export default {
     appEditUserInformations : EditUserInformations,
     appEditPassword : EditPassword,
     appEditStudentInformations : EditStudentInformations,
+    appEditStudentResume : EditStudentResume,
     appEditCompanyInformations : EditCompanyInformations,
   }
   
@@ -159,6 +166,7 @@ export default {
 #forms
 {
   padding: 10px 50px;
+  min-height: 450px;
 }
 
 </style>

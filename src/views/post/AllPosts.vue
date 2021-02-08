@@ -22,6 +22,7 @@
                 label="Date range"
                 prepend-icon="mdi-calendar"
                 readonly
+                outlined
               ></v-text-field>
               <app-single-post v-for="post in filteredPosts" :key="post.id" :post="post" ></app-single-post>
               <p v-if="this.filteredPosts.length == 0" >

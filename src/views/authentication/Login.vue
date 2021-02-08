@@ -50,7 +50,7 @@
                         block
                         :loading="isLoading"
                         :disabled="!valid"
-                        color="#6c63ff"
+                        color="primary"
                         class="my-3 mr-4"
                         @click="submit"
                         >

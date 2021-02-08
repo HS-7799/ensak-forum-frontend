@@ -39,28 +39,6 @@
               label="About you"
               v-model="description"
             ></v-textarea>
-
-          <v-file-input
-              v-model="files"
-              placeholder="Upload resume"
-              label="Resume"
-              multiple
-              prepend-icon="mdi-paperclip"
-          >
-              <template v-slot:selection="{ text }">
-                <v-chip
-                  small
-                  label
-                  color="primary"
-                >
-                  {{ text }}
-                </v-chip>
-              </template>
-          </v-file-input>
-
-
-            
-
         <v-btn
             :disabled="!valid"
             :loading="isLoading"
@@ -95,8 +73,7 @@ export default {
             speciality : null,
             description : '',
             address : '',
-            phone : '',
-            files : [],
+            // files : [],
         }
     },
     created()
@@ -144,7 +121,7 @@ export default {
             .then(() => {
               this.isLoading = false
               this.$store.dispatch('setShowSnack',true)
-              this.$store.dispatch('setSnackMessage','Informations are updated successfully')
+              this.$store.dispatch('setSnackMessage','Student informations are updated successfully')
             })
             .catch(() => {
               this.isLoading = false
@@ -153,7 +130,7 @@ export default {
             axios.post(`/api/students`,form)
             .then((res) => {
               this.$store.dispatch('setShowSnack',true)
-              this.$store.dispatch('setSnackMessage','Informations are updated successfully')
+              this.$store.dispatch('setSnackMessage','Student informations are updated successfully')
               this.$store.dispatch("setStudentId",res.data)
               this.isLoading = false
               this.errors = []

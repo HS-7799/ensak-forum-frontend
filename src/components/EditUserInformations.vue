@@ -1,6 +1,7 @@
 <template>
   <v-card
     max-width="700"
+    class="mb-1"
   >
     
     <v-container>
@@ -22,14 +23,6 @@
                 :counter="20"
                 :rules="nameRules"
                 label="Name"
-                required
-                ></v-text-field>
-
-                <v-text-field
-                v-model="username"
-                :counter="20"
-                :rules="userNameRules"
-                label="Userame"
                 required
                 ></v-text-field>
 
@@ -72,18 +65,11 @@ export default {
       name: '',
       email: '',
       errors : [],
-      username : '',
     //   rules
       nameRules: [
         v => !!v || 'Name is required',
         v => (v && v.length <= 20) || 'Name must be less than 30 characters',
         v => (v && v.length >= 6) || 'Name must be more than 6 characters',
-      ],
-      userNameRules : [
-        v => !!v || 'Username is required',
-        v => /^[a-z][a-z]+\d*$/i.test(v) || 'Username is not valid',
-        v => (v && v.length >=3) || 'Username must be more than 3 characters',
-        v => (v  && v.length <= 20) || 'Username must be less than 20 characters',
       ],
       emailRules: [
         v => !!v || 'E-mail is required',
@@ -93,15 +79,13 @@ export default {
     }),
     created()
     {
-        this.name = this.userInfo.name
-        this.username = this.userInfo.username
-        this.email = this.userInfo.email
+        this.name = this.$store.getters.getName
+        this.email = this.$store.getters.getEmail
     },
     methods : {
         submit()
         {
           const form = {
-            username : this.username,
             name : this.name,
             email : this.email
 
@@ -109,7 +93,11 @@ export default {
           this.isLoading=true
           axios.put(`/api/auth/profile/update/${this.userId}` ,form,{headers : AuthHeader()})
             .then(() => {
+              this.$store.dispatch('setName',this.name)
+              this.$store.dispatch('setEmail',this.email)
               this.isLoading = false
+              this.$store.dispatch('setShowSnack',true)
+              this.$store.dispatch('setSnackMessage','Informations are updated successfully')
             })
             .catch(() => {
               this.isLoading = false

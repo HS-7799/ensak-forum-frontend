@@ -104,7 +104,7 @@
                     </v-form>
                       
                     <v-btn
-                      color="#6c63ff"
+                      color="primary"
                       :disabled="!valid"
                       @click="toStepTwo"
                     >
@@ -138,7 +138,7 @@
                     </v-form>
                         
                     <v-btn
-                      color="#6c63ff"
+                      color="primary"
                       @click="e1 = 3"
                       :disabled="!isValid2"
                     >
@@ -160,7 +160,7 @@
                         ></v-textarea>
                     <v-btn
                     :loading="isLoading"
-                    color="#6c63ff"
+                    color="primary"
                     tile
                     block
                     @click="register"
