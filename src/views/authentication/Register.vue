@@ -1,197 +1,202 @@
 <template>
+    <div id="login-bg" >
       <v-container>
-        <v-row dense style="justify-content:center">
-          <v-col cols="12" md="10" lg="8" >
-          <v-card width="100%"  class="mx-auto mt-7"  >
-            <h2 style="text-align:center" >
-            <span id="login" >REGISTER</span>
-            </h2>
-            <v-stepper v-model="e1">
-              <v-stepper-header >
-                <v-stepper-step
-                  :complete="e1 > 1"
-                  step="1"
-                  :rules="[() => errors1.length > 0 ? false : true]"
-                >
-                  User informations
-                </v-stepper-step>
+        <v-row dense>
+          <v-col cols="12" sm="4">
+              <v-img src="@/assets/login/register.svg" />
+          </v-col>
+          <v-col cols="12" sm="8" >
+            <v-card width="100%" style="box-shadow:none"  class="mx-auto mt-7"  >
+              <h2 style="text-align:center" >
+              <span id="login" >REGISTER</span>
+              </h2>
+              <v-stepper v-model="e1">
+                <v-stepper-header >
+                  <v-stepper-step
+                    :complete="e1 > 1"
+                    step="1"
+                    :rules="[() => errors1.length > 0 ? false : true]"
+                  >
+                    User informations
+                  </v-stepper-step>
 
-                <v-divider></v-divider>
+                  <v-divider></v-divider>
 
-                <v-stepper-step
-                  :complete="e1 > 2"
-                  step="2"
-                  :rules="[() => errors2.length > 0 ? false : true]"
-                >
-                  Level and speciality
-                </v-stepper-step>
+                  <v-stepper-step
+                    :complete="e1 > 2"
+                    step="2"
+                    :rules="[() => errors2.length > 0 ? false : true]"
+                  >
+                    Level and speciality
+                  </v-stepper-step>
 
-                <v-divider></v-divider>
+                  <v-divider></v-divider>
 
-                <v-stepper-step step="3" >
-                  Description
-                </v-stepper-step>
-              </v-stepper-header>
+                  <v-stepper-step step="3" >
+                    Description
+                  </v-stepper-step>
+                </v-stepper-header>
 
-              <v-stepper-items>
-                <v-stepper-content step="1">
-                  
-                  <v-alert type="error" v-if="errors1.length > 0" >
-                    <ul v-for="error in errors1" :key="error" >
-                      <li>{{ error }}</li>
-                    </ul>
-                  </v-alert>
-                  <v-form
-                    ref="form"
-                    v-model="valid"
-                    >
-                        <v-text-field
-                        v-model="name"
-                        :counter="20"
-                        :rules="nameRules"
-                        label="Name"
-                        required
-                        ></v-text-field>
-
-                        <v-text-field
-                        v-model="username"
-                        :counter="20"
-                        :rules="userNameRules"
-                        label="Userame"
-                        required
-                        ></v-text-field>
-
-                        <v-text-field
-                        v-model="email"
-                        type="email"
-                        :rules="emailRules"
-                        label="E-mail"
-                        required
-                        ></v-text-field>
-
-                        <v-text-field
-                        v-model="password"
-                        :counter="40"
-                        :rules="passwordRules"
-                        label="Password"
-                        :type="showPassword ? 'text' : 'password'"
-                        :append-icon="showPassword ? 'mdi-eye':'mdi-eye-off'"
-                        @click:append="showPassword = !showPassword"
-                        required
-                    >
-                    </v-text-field>
-                    <v-text-field
-                        v-model="passwordConfirmation"
-                        :counter="40"
-                        :rules="[(password === passwordConfirmation) || 'password must match',
-                                (!!passwordConfirmation || 'Password confirmation is required')]"
-                        label="Confirm Password"
-                        :type="showPasswordConfirmation ? 'text' : 'password'"
-                        :append-icon="showPasswordConfirmation ? 'mdi-eye':'mdi-eye-off'"
-                        @click:append="showPasswordConfirmation = !showPasswordConfirmation"
-                        required
-                    >
-                    </v-text-field>
-
-                        <v-btn block tile class="my-2" @click="clear">
-                            clear
-                        </v-btn>
-
-                  </v-form>
+                <v-stepper-items>
+                  <v-stepper-content step="1">
                     
-                  <v-btn
-                    color="primary"
-                    :disabled="!valid"
-                    @click="toStepTwo"
-                  >
-                    Continue
-                  </v-btn>
-                </v-stepper-content>
+                    <v-alert type="error" v-if="errors1.length > 0" >
+                      <ul v-for="error in errors1" :key="error" >
+                        <li>{{ error }}</li>
+                      </ul>
+                    </v-alert>
+                    <v-form
+                      ref="form"
+                      v-model="valid"
+                      >
+                          <v-text-field
+                          v-model="name"
+                          :counter="20"
+                          :rules="nameRules"
+                          label="Name"
+                          required
+                          ></v-text-field>
 
-                <v-stepper-content step="2">
-                  
-                  <v-alert type="error" v-if="errors2.length > 0" >
-                    <ul v-for="error in errors2" :key="error" >
-                      <li>{{ error }}</li>
-                    </ul>
-                  </v-alert>
-                  <v-form>
-                            <v-select
-                            v-model="level"
-                            :items="levels"
-                            item-value="id"
-                            item-text="label"
-                            label="Level"
-                        ></v-select>
-                        <v-select
-                            v-model="speciality"
-                            :items="specialities"
-                            item-value="id"
-                            item-text="label"
-                            label="Speciality"
-                        ></v-select>
+                          <v-text-field
+                          v-model="username"
+                          :counter="20"
+                          :rules="userNameRules"
+                          label="Userame"
+                          required
+                          ></v-text-field>
 
-                  </v-form>
+                          <v-text-field
+                          v-model="email"
+                          type="email"
+                          :rules="emailRules"
+                          label="E-mail"
+                          required
+                          ></v-text-field>
+
+                          <v-text-field
+                          v-model="password"
+                          :counter="40"
+                          :rules="passwordRules"
+                          label="Password"
+                          :type="showPassword ? 'text' : 'password'"
+                          :append-icon="showPassword ? 'mdi-eye':'mdi-eye-off'"
+                          @click:append="showPassword = !showPassword"
+                          required
+                      >
+                      </v-text-field>
+                      <v-text-field
+                          v-model="passwordConfirmation"
+                          :counter="40"
+                          :rules="[(password === passwordConfirmation) || 'password must match',
+                                  (!!passwordConfirmation || 'Password confirmation is required')]"
+                          label="Confirm Password"
+                          :type="showPasswordConfirmation ? 'text' : 'password'"
+                          :append-icon="showPasswordConfirmation ? 'mdi-eye':'mdi-eye-off'"
+                          @click:append="showPasswordConfirmation = !showPasswordConfirmation"
+                          required
+                      >
+                      </v-text-field>
+
+                          <v-btn block tile class="my-2" @click="clear">
+                              clear
+                          </v-btn>
+
+                    </v-form>
                       
-                  <v-btn
-                    color="primary"
-                    @click="e1 = 3"
-                    :disabled="!isValid2"
-                  >
-                    Continue
-                  </v-btn>
+                    <v-btn
+                      color="#6c63ff"
+                      :disabled="!valid"
+                      @click="toStepTwo"
+                    >
+                      Continue
+                    </v-btn>
+                  </v-stepper-content>
 
-                  <v-btn text @click="e1 = 1" >
-                    Cancel
-                  </v-btn>
-                </v-stepper-content>
+                  <v-stepper-content step="2">
+                    
+                    <v-alert type="error" v-if="errors2.length > 0" >
+                      <ul v-for="error in errors2" :key="error" >
+                        <li>{{ error }}</li>
+                      </ul>
+                    </v-alert>
+                    <v-form>
+                              <v-select
+                              v-model="level"
+                              :items="levels"
+                              item-value="id"
+                              item-text="label"
+                              label="Level"
+                          ></v-select>
+                          <v-select
+                              v-model="speciality"
+                              :items="specialities"
+                              item-value="id"
+                              item-text="label"
+                              label="Speciality"
+                          ></v-select>
 
-                <v-stepper-content step="3">
-                  <v-form>
-                      <v-textarea
-                      clearable
-                      clear-icon="mdi-close"
-                      label="About you"
-                      v-model="description"
-                      ></v-textarea>
+                    </v-form>
+                        
+                    <v-btn
+                      color="#6c63ff"
+                      @click="e1 = 3"
+                      :disabled="!isValid2"
+                    >
+                      Continue
+                    </v-btn>
 
-                  <!-- <v-file-input
-                      v-model="file"
-                      placeholder="Upload your resume"
-                      label="Resume"
-                      prepend-icon="mdi-paperclip"
-                  >
-                      <template v-slot:selection="{ text }">
-                          <v-chip
-                          small
-                          label
-                          color="primary"
-                          >
-                          {{ text }}
-                          </v-chip>
-                      </template>
-                  </v-file-input> -->
-                  <v-btn
-                  :loading="isLoading"
-                  color="primary"
-                  tile
-                  block
-                  @click="register"
-                  >   
-                    Register
-                  </v-btn>
-                  </v-form>
-                          
-                  <v-btn text @click="e1 = 2">
-                    Cancel
-                  </v-btn>
-                </v-stepper-content>
-              </v-stepper-items>
-            </v-stepper>
-          </v-card>
+                    <v-btn text @click="e1 = 1" >
+                      Cancel
+                    </v-btn>
+                  </v-stepper-content>
+
+                  <v-stepper-content step="3">
+                    <v-form>
+                        <v-textarea
+                        clearable
+                        clear-icon="mdi-close"
+                        label="About you"
+                        v-model="description"
+                        ></v-textarea>
+
+                    <!-- <v-file-input
+                        v-model="file"
+                        placeholder="Upload your resume"
+                        label="Resume"
+                        prepend-icon="mdi-paperclip"
+                    >
+                        <template v-slot:selection="{ text }">
+                            <v-chip
+                            small
+                            label
+                            color="primary"
+                            >
+                            {{ text }}
+                            </v-chip>
+                        </template>
+                    </v-file-input> -->
+                    <v-btn
+                    :loading="isLoading"
+                    color="#6c63ff"
+                    tile
+                    block
+                    @click="register"
+                    >   
+                      Register
+                    </v-btn>
+                    </v-form>
+                            
+                    <v-btn text @click="e1 = 2">
+                      Cancel
+                    </v-btn>
+                  </v-stepper-content>
+                </v-stepper-items>
+              </v-stepper>
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
+    </div>
 </template>
 
 <script>
