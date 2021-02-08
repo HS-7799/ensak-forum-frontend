@@ -1,6 +1,8 @@
 <template>
-  <v-card max-width="700" min-height="250px" class="mx-auto mt-16" >
-    
+  <v-card max-width="700" min-height="250px" class="mx-16 mt-16" >
+    <v-card-title>
+      Edit post
+    </v-card-title>
     <v-container>
       <v-row dense>
         <v-col cols="12">

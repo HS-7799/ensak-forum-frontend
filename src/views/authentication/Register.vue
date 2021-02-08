@@ -158,23 +158,6 @@
                         label="About you"
                         v-model="description"
                         ></v-textarea>
-
-                    <!-- <v-file-input
-                        v-model="file"
-                        placeholder="Upload your resume"
-                        label="Resume"
-                        prepend-icon="mdi-paperclip"
-                    >
-                        <template v-slot:selection="{ text }">
-                            <v-chip
-                            small
-                            label
-                            color="primary"
-                            >
-                            {{ text }}
-                            </v-chip>
-                        </template>
-                    </v-file-input> -->
                     <v-btn
                     :loading="isLoading"
                     color="#6c63ff"

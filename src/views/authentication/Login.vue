@@ -1,70 +1,70 @@
 <template>
   <div id="login-bg" >
     <v-container>
-    <v-row>
-    <v-col cols="12" sm="6" >
-      <v-img src="@/assets/login/sign_in.svg" />
-    </v-col>
-    <v-col cols="12" sm="6" >
-      <v-card max-width="450" min-height="400px" style="box-shadow:none" class="ml-auto mt-3 mr-6" >
-        <v-container>
-          <v-row dense>
-            <v-col cols="12">
-              <h2 style="text-align:center" >
-                <span id="login" >LOGIN</span>
-              </h2>
-              <v-alert type="error" v-if="errors.length > 0" >
-                <ul v-for="error in errors" :key="error" >
-                  <li>{{ error }}</li>
-                </ul>
-              </v-alert>
-                <v-form
-                    @submit.prevent="submit"
-                    ref="form"
-                    v-model="valid"
-                >
-                    <v-text-field
-                    class="my-3"
-                    v-model="username"
-                    :counter="20"
-                    :rules="userNameRules"
-                    label="Username"
-                    prepend-icon="mdi-account"
-                    required
-                    ></v-text-field>
-
-                    <v-text-field
-                    class="my-3"
-                    v-model="password"
-                    :rules="passwordRules"
-                    label="Password"
-                    :type="showPassword ? 'text' : 'password'"
-                    prepend-icon="mdi-lock"
-                    :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                    @click:append="showPassword = !showPassword"
-                    required>
-                    </v-text-field>
-
-                    <v-btn
-                    tile
-                    block
-                    :loading="isLoading"
-                    :disabled="!valid"
-                    color="#6c63ff"
-                    class="my-3 mr-4"
-                    @click="submit"
+      <v-row>
+        <v-col cols="12" sm="6" >
+          <v-img src="@/assets/login/sign_in.svg" />
+        </v-col>
+        <v-col cols="12" sm="6" >
+          <v-card max-width="450" min-height="400px" style="box-shadow:none" class="ml-auto mt-3 mr-6" >
+            <v-container>
+              <v-row dense>
+                <v-col cols="12">
+                  <h2 style="text-align:center" >
+                    <span id="login" >LOGIN</span>
+                  </h2>
+                  <v-alert type="error" v-if="errors.length > 0" >
+                    <ul v-for="error in errors" :key="error" >
+                      <li>{{ error }}</li>
+                    </ul>
+                  </v-alert>
+                    <v-form
+                        @submit.prevent="submit"
+                        ref="form"
+                        v-model="valid"
                     >
-                    Login
-                    </v-btn>
-                    Need an account ? <router-link style="text-decoration:none" color="primary" to="/register" >register</router-link>
+                        <v-text-field
+                        class="my-3"
+                        v-model="username"
+                        :counter="20"
+                        :rules="userNameRules"
+                        label="Username"
+                        prepend-icon="mdi-account"
+                        required
+                        ></v-text-field>
 
-                </v-form>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-card>
-    </v-col>
-    </v-row>
+                        <v-text-field
+                        class="my-3"
+                        v-model="password"
+                        :rules="passwordRules"
+                        label="Password"
+                        :type="showPassword ? 'text' : 'password'"
+                        prepend-icon="mdi-lock"
+                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                        @click:append="showPassword = !showPassword"
+                        required>
+                        </v-text-field>
+
+                        <v-btn
+                        tile
+                        block
+                        :loading="isLoading"
+                        :disabled="!valid"
+                        color="#6c63ff"
+                        class="my-3 mr-4"
+                        @click="submit"
+                        >
+                        Login
+                        </v-btn>
+                        Need an account ? <router-link style="text-decoration:none" color="primary" to="/register" >register</router-link>
+
+                    </v-form>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card>
+        </v-col>
+      </v-row>
   </v-container>
   </div>
 </template>

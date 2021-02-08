@@ -35,7 +35,7 @@
   </v-card>
   <v-container style="margin-top:60px" >
       <v-row  >
-        <v-col cols="12" md="4" >
+        <v-col cols="12">
           <v-card tile >
             <v-card-title>
               Email

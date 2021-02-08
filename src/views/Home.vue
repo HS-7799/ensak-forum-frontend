@@ -79,7 +79,7 @@ body
 #middle svg
 {
   color: orange;
-  top: 7px;
+  top: 10px;
   position: relative;
 }
 #middle .row
