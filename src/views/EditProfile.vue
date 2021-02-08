@@ -1,19 +1,44 @@
 <template>
-    <v-container>
-      <v-row>
-        <v-col cols="12" md="6"  >
-            <app-edit-user-informations v-if="userInfo.name !== '' " :userInfo="userInfo" ></app-edit-user-informations>
-            <app-edit-password :userId="userId" ></app-edit-password>
-        </v-col>
-        
-        <v-col cols="12" md="6" v-if="roles.includes('ROLE_ETUDIANT')" >
-          <app-edit-student-informations :id="id" :userId="userId" ></app-edit-student-informations>
-        </v-col>
-        <v-col cols="12" md="6" v-if="roles.includes('ROLE_ENTREPRISE')" >
-          <app-edit-company-informations :id="id" :userId="userId" ></app-edit-company-informations>
-        </v-col>
-      </v-row>
-    </v-container>
+    <div>
+      <div id="edit-account-bg" >
+        <div id="edit-bannder" >
+          <img  src="@/assets/profile_details.svg" width="330px" />
+        </div>
+        <v-row id="tabs" >
+          <v-col cols="12" class="p-0" >
+            <v-tabs
+              background-color="orange"
+              center-active
+              dark
+            >
+            <v-tab @click="selectedCmp = 'appEditUserInformations'" >
+              Personnal informations
+            </v-tab>
+            <v-tab @click="selectedCmp = 'appEditPassword'" >
+              Password
+            </v-tab>
+            <v-tab v-if="roles.includes('ROLE_ETUDIANT')"  @click="selectedCmp = 'appEditStudentInformations'" >
+              Student informations
+            </v-tab>
+            <v-tab v-if="roles.includes('ROLE_ENTREPRISE')" @click="selectedCmp = 'appEditCompanyInformations'" >
+              Company informations
+            </v-tab>
+            </v-tabs>
+          </v-col>
+        </v-row>
+        </div>
+        <v-row id="forms" >
+          <v-col cols="12" >
+            <transition name="fade" mode="out-in" >
+              <component :is="selectedCmp"
+                        v-if="userInfo.name !== '' " 
+                        :userInfo="userInfo" :id="id" 
+                        :userId="userId" >
+              </component>
+            </transition>
+          </v-col>
+        </v-row>
+    </div>
 </template>
 
 <script>
@@ -30,6 +55,7 @@ export default {
   {
     return {
       roles : [],
+      selectedCmp : 'appEditUserInformations',
       id : null,
       userId : null,
       userInfo : {
@@ -84,6 +110,55 @@ export default {
 }
 </script>
 
-<style>
+<style scoped >
+
+.fade-enter
+{
+  opacity: 0;
+}
+
+.fade-enter-active
+{
+  transition: opacity .5s;
+}
+
+.fade-leave-active
+{
+  transition: opacity .5s;
+  opacity: 0;
+}
+
+.fade-leave
+{
+  opacity: 1;
+
+}
+
+#edit-account-bg
+{
+  background: linear-gradient(to top,#ff8c00,#ffffff);
+  height: 300px;
+  position: relative;
+}
+
+#tabs
+{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#edit-bannder img
+{
+  position:absolute;
+  right:0;
+  bottom:60px
+}
+
+#forms
+{
+  padding: 10px 50px;
+}
 
 </style>

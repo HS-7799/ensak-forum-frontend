@@ -1,21 +1,15 @@
 <template>
   <v-card
-    max-width="450"
-    class="mx-auto my-4"
+    max-width="700"
   >
-    
-    
     <v-container>
       <v-row dense>
         <v-col cols="12">
-          <h2 style="text-align:center" >Change password</h2>
+          <h2>Change password</h2>
           <v-alert type="error" v-if="errors.length > 0" >
             <ul v-for="error in errors" :key="error" >
               <li>{{ error }}</li>
             </ul>
-          </v-alert>
-          <v-alert type="success" v-if="message" >
-            {{ message }}
           </v-alert>
           <v-form
             @submit.prevent="submit"
@@ -84,7 +78,6 @@ import AuthHeader from '../services/auth-header.js';
       isLoading : false,
       valid: true,
       errors : [],
-      message : null,
       oldPassword : '',
       newPassword : '',
       newPasswordConfirmation : '',
@@ -112,7 +105,8 @@ import AuthHeader from '../services/auth-header.js';
         this.isLoading = true
         axios.put(`/api/auth/profile/updatepassword/${this.userId}`,form,{headers : AuthHeader()})
         .then((res) => {
-          this.message = res.data.message
+          this.$store.dispatch('setShowSnack',true)
+          this.$store.dispatch('setSnackMessage',res.data.message)
           this.errors = []
           this.isLoading = false
           this.clear()
