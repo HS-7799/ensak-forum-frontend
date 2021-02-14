@@ -181,7 +181,7 @@
 import axios from 'axios'
 import AuthHeader from '../../services/auth-header'
 import {mapGetters} from 'vuex'
-import AddPost from '../../components/post/AddPost'
+// import AddPost from '../../components/post/AddPost'
 export default {
     data()
     {
@@ -343,9 +343,9 @@ export default {
         }
       
     },
-    components : {
-        appAddPost : AddPost
-    }
+    // components : {
+    //     appAddPost : AddPost
+    // }
 }
 </script>
 
