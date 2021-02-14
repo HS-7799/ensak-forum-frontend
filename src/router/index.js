@@ -22,6 +22,8 @@ import EditProfile from '../views/EditProfile.vue'
 
 // admin
 import Dashboard from '../views/admin/Dashboard.vue'
+import CreateAdmin from '../views/admin/CreateAdmin.vue'
+
 import Level from '../views/admin/level/Level.vue'
 import Speciality from '../views/admin/speciality/Speciality.vue'
 import ActivityArea from '../views/admin/activity/ActivityArea.vue'
@@ -49,6 +51,9 @@ const routes = [
   {
     path : '/admin',name : 'Admin',component : Dashboard,
     children : [
+      {
+        path : 'create', name : 'Admin / Create', component : CreateAdmin
+      },
       {
         path : 'levels', name : 'Admin / Level', component : Level
       },

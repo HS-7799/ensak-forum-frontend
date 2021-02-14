@@ -151,6 +151,7 @@ export default {
           { to : '/admin/students', name : 'Students' },
           { to : '/admin/companies', name : 'Companies' },
           { to : '/admin/posts', name : 'Posts' },
+          { to : '/admin/create', name : 'Add Admin' },
       ]
     }),
     computed : {

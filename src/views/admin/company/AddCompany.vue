@@ -209,7 +209,7 @@ import {mapGetters} from 'vuex';
             }
             this.isLoading = true
 
-            axios.post('/api/auth/signup',form, { headers : authHeader() })
+            axios.post('/api/auth/admin',form, { headers : authHeader() })
             .then((res) => {
                 this.errors1 = []
                 
@@ -235,6 +235,7 @@ import {mapGetters} from 'vuex';
             }).catch((err) => {
                 this.errors1 = err.response.data.message.split(',')
                 this.errors1.pop();
+                this.isLoading = false
             });
           }
         },
