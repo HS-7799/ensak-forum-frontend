@@ -91,19 +91,6 @@
                     </ul>
                   </v-alert>
               <v-form>
-                <v-textarea
-                    clearable
-                    clear-icon="mdi-close"
-                    label="About this company"
-                    v-model="description"
-                ></v-textarea>
-                <v-text-field
-                v-model="address"
-                
-                label="address"
-                
-                ></v-text-field>
-                
                 <v-select
                     v-model="activityarea"
                     :items="activityareas"
@@ -111,10 +98,7 @@
                     item-text="label"
                     label="activity area"
                 ></v-select>
-
-                    
-
-                    </v-form>
+              </v-form>
           </v-card-text>
       </v-card>
       <v-btn color="#4BBAFC" :disabled="!isValid2" :loading="isLoading" @click="submit">Add company</v-btn>

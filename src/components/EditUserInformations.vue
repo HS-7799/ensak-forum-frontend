@@ -79,8 +79,8 @@ export default {
     }),
     created()
     {
-        this.name = this.$store.getters.getName
-        this.email = this.$store.getters.getEmail
+        this.name = this.userInfo.name
+        this.email = this.userInfo.email
     },
     methods : {
         submit()

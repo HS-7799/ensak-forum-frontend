@@ -70,6 +70,7 @@ export default {
 </script>
 
 <style>
+
 .main
 {
   min-height: 100vh;

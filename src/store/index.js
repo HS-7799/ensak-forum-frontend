@@ -37,6 +37,7 @@ export default new Vuex.Store({
     setShowSnack(state,value)
     {
       state.showSnack = value
+      window.scrollTo(0,0);
     },
     setSnackMessage(state,value)
     {

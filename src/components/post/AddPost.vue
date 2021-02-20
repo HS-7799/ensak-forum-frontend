@@ -132,7 +132,14 @@ import { mapGetters } from 'vuex';
                 this.$store.dispatch('setSnackMessage','Post added successfully')
             }).catch((err) => {
                 this.isLoading = false
-                if(err.response.status === 500)
+                if(this.companyId == null)
+                {
+                  this.clear()
+                  this.$store.dispatch('setShowSnack',true)
+                  this.$store.dispatch('setSnackColor','error')
+                  this.$store.dispatch('setSnackMessage','Please complete you registration')
+                }
+                else if(err.response.status === 500)
                 {
                     this.$router.push('/forbidden')
                 }

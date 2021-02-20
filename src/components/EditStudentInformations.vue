@@ -15,7 +15,6 @@
         <v-form
             @submit.prevent="submit"
             ref="form"
-            v-model="valid"
         >
 
           <v-select
@@ -40,7 +39,7 @@
               v-model="description"
             ></v-textarea>
         <v-btn
-            :disabled="!valid"
+            :disabled="!isValid"
             :loading="isLoading"
             color="primary"
             class="mr-4"
@@ -73,7 +72,6 @@ export default {
             speciality : null,
             description : '',
             address : '',
-            // files : [],
         }
     },
     created()
@@ -123,7 +121,9 @@ export default {
               this.$store.dispatch('setShowSnack',true)
               this.$store.dispatch('setSnackMessage','Student informations are updated successfully')
             })
-            .catch(() => {
+            .catch((err) => {
+              this.errors = err.response.data.details.split(',')
+              this.errors.pop()
               this.isLoading = false
             });
           } else {
@@ -135,8 +135,9 @@ export default {
               this.isLoading = false
               this.errors = []
             })
-            .catch(() => {
-              this.errors = ['level and speciality are required']
+            .catch((err) => {
+              this.errors = err.response.data.details.split(',')
+              this.errors.pop()
               this.isLoading = false
             });
           }       
@@ -146,7 +147,19 @@ export default {
       ...mapGetters({
         levels : 'getLevels',
         specialities : 'getSpecialities'
-      })
+      }),
+      isValid()
+        {
+            const levelIds = this.levels.map(level => {
+                return level.id
+            })
+
+            const specialityIds = this.specialities.map(speciality => {
+                return speciality.id
+            })
+
+            return specialityIds.includes(this.speciality) && levelIds.includes(this.level)
+        }
     }
 
 }

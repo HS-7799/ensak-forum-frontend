@@ -15,7 +15,6 @@
         <v-form
             @submit.prevent="submit"
             ref="form"
-            v-model="valid"
         >
 
             
@@ -37,28 +36,9 @@
                 :counter="20"
                 label="address"
                 required
-                ></v-text-field>
-            <!-- <v-file-input
-              v-model="files"
-              placeholder="Upload logo"
-              label="Logo"
-              multiple
-              prepend-icon="mdi-paperclip"
-          >
-              <template v-slot:selection="{ text }">
-                <v-chip
-                  small
-                  label
-                  color="primary"
-                >
-                  {{ text }}
-                </v-chip>
-              </template>
-          </v-file-input> -->
-                
-            
+                ></v-text-field>      
           <v-btn
-              :disabled="!valid"
+              :disabled="!isValid"
               :loading="isLoading"
               color="primary"
               class="mr-4"
@@ -84,10 +64,8 @@ export default {
     data()
     {
         return {
-            valid : true,
             isLoading : false,
             errors : [],
-            // files : [],
             activityarea : null,
             description : '',
             address : '',
@@ -136,28 +114,45 @@ export default {
               this.$store.dispatch('setSnackMessage','Company informations are updated successfully')
               this.isLoading = false
             })
-            .catch(() => {
+            .catch((err) => {
+              this.setErrors(err)
               this.isLoading = false
             });
           } else {
             axios.post(`/api/companies`,form,{headers : AuthHeader()})
-            .then(() => {
+            .then((res) => {
+              console.log(res);
+              this.$store.dispatch("setCompanyId",res.data.id)
               this.$store.dispatch('setShowSnack',true)
               this.$store.dispatch('setSnackMessage','Company informations are updated successfully')
               this.isLoading = false
               this.errors = []
             })
-            .catch(() => {
-              this.errors = ['activity area is required']
+            .catch((err) => {
+              this.setErrors(err)
               this.isLoading = false
             });
-          }       
+          }
+                 
+        },
+        setErrors(err)
+        {
+          this.errors = err.response.data.details.split(',')
+            this.errors.pop()
         }
     },
     computed : {
       ...mapGetters({
         activityareas : 'getActivityareas'
-      })
+      }),
+      isValid()
+        {
+            const activitiesIds = this.activityareas.map(activity => {
+                return activity.id
+            })
+
+            return activitiesIds.includes(this.activityarea)
+        }
     }
 
 }

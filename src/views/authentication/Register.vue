@@ -33,7 +33,7 @@
                   <v-divider></v-divider>
 
                   <v-stepper-step step="3" >
-                    Description
+                    Register
                   </v-stepper-step>
                 </v-stepper-header>
 
@@ -152,12 +152,12 @@
 
                   <v-stepper-content step="3">
                     <v-form>
-                        <v-textarea
+                        <!-- <v-textarea
                         clearable
                         clear-icon="mdi-close"
                         label="About you"
                         v-model="description"
-                        ></v-textarea>
+                        ></v-textarea> -->
                     <v-btn
                     :loading="isLoading"
                     color="primary"
