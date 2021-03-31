@@ -1,5 +1,7 @@
 # forum-ensak-frontend
 
+This is the frontend part of forum ensak enterprise
+
 ## Project setup
 ```
 npm install
